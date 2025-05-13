@@ -1,13 +1,13 @@
 <div class="container">
-    <form action="">
+    <form (ngSubmit)="addPost()" #postForm="ngForm">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Enter title">
+            <input [(ngModel)]="titleInput" name="titleInput" type="text" class="form-control" id="title" placeholder="Enter title">
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">Content</label>
-            <textarea class="form-control" id="content" rows="3"></textarea>
+            <textarea [(ngModel)]="contentInput" name="contentInput" class="form-control" id="content" rows="3"></textarea>
         </div>
-        <button (cancel)="addPost()" type="submit" class="btn btn-primary">Submit</button>   
+        <button type="submit" class="btn btn-primary">Submit</button>   
     </form>
 </div>
