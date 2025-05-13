@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-
+  addLike() {
+    const btn = document.getElementById('likeButton');
+    btn?.classList.toggle('liked');
+    }
 }

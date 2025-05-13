@@ -8,9 +8,8 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
-  addLike() {
+  public addLike() {
     const btn = document.getElementById('likeButton');
     btn?.classList.toggle('liked');
-    
   }
 }

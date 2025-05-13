@@ -1,0 +1,10 @@
+.liked {
+    background-color: #0B5ED7 ;
+    color: aliceblue;
+    border: 1px solid #0B5ED7 !important;
+}
+
+#likeButton {
+    border: 1px solid black;
+}
+
