@@ -35,7 +35,7 @@ export class LoginComponent {
       logoutBtn?.classList.add('show')
       
       console.log('Login successful');
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
 
     }
   }

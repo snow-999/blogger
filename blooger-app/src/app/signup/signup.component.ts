@@ -18,7 +18,7 @@ export class SignupComponent {
   register() {
     if (this.passInput.length > 8 && this.emailInput.includes('@example.com')) {
       console.log('sign up successful');
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
     }
   }
 }

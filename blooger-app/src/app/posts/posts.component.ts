@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {Posts} from './posts.model';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-posts',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.css'
 })
@@ -11,15 +11,12 @@ import {Posts} from './posts.model';
 
   
 export class PostsComponent {
-  posts: Posts[] = [
-    { postId: '1', userName: 'john doe', userId: '1', title: 'My First Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
-    { postId: '2', userName: 'jane doe', userId: '2', title: 'My Second Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
-    { postId: '3', userName: 'john smith', userId: '3', title: 'My Third Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
-    { postId: '4', userName: 'jane smith', userId: '4', title: 'My Fourth Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
-  ]
+  @Input() post?: Posts;
   
+
   public addLike() {
     const btn = document.getElementById('likeButton');
     btn?.classList.toggle('liked');
   }
+
 }
