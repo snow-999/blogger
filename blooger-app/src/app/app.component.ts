@@ -11,7 +11,6 @@ export class AppComponent {
   title = 'blogger-app';
 
 post = {
-      id: 1,
       userName: 'john doe',
       userId : 1,
       title: 'My First Blog',
@@ -22,10 +21,8 @@ post = {
 constructor(private dbService: IndexedDbService) {}
 
   ngOnInit(): void {
-    // Save a post
-    this.dbService.savePost(this.post);
+    
 
-    // Load all posts
     this.dbService.getAllPosts().then(posts => {
       console.log('📚 Blog Posts:', posts);
     });

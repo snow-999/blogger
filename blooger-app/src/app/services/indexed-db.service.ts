@@ -14,7 +14,7 @@ export class IndexedDbService {
 
   private initDB(): Promise<IDBDatabase> {
     return new Promise((resolve, reject) => {
-      const request = indexedDB.open('BlogDB', 2);
+      const request = indexedDB.open('BlogIndexDB', 3);
 
       request.onerror = (event) => {
         console.error('Error opening DB', event);
@@ -31,14 +31,16 @@ export class IndexedDbService {
         const db = event.target.result;
 
         if (!db.objectStoreNames.contains('posts')) {
-          const store = db.createObjectStore('posts', { keyPath: 'id' });
-          store.createIndex('title', 'title', { unique: false });
-          store.createIndex('date', 'date', { unique: false });
-          store.createIndex('userName', 'userName', { unique: false });
-        }
+          db.createObjectStore('posts', {
+                    keyPath: 'id',       
+                    autoIncrement: true  
+                  });
+              }
       };
-    });
-  }
+      
+        }
+      );
+    }
 
   async savePost(post: any): Promise<void> {
     const db = await this.dbReady;
@@ -53,10 +55,8 @@ export class IndexedDbService {
       const tx = db.transaction(['posts'], 'readonly');
       const store = tx.objectStore('posts');
       const request = store.getAll();
-
       request.onsuccess = () => resolve(request.result);
       request.onerror = () => reject(request.error);
     });
   }
 }
-
