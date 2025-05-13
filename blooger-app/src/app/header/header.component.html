@@ -1,19 +1,19 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+<nav class="navbar navbar-expand-lg mb-0">
+    <div class="container">
+      <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="navbar-brand" href="#">Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse mx-0" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
-            <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link active" aria-current="page" href="#">Home</a>
+            <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link active" aria-current="page">Home</a>
           </li>
           <li class="nav-item">
-            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" href="#">profile</a>
+            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
           </li>
           <li class="nav-item">
-            <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" href="#">login</a>
+            <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
           </li>
           <li class="nav-item">
             <a routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" aria-disabled="true">signup</a>
