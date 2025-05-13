@@ -1,23 +1,29 @@
 <div class="row flex-column g-3 flex-start">
-  <div class="w-50">
-    <div class="col-auto">
-    <label for="inputemail" class="col-form-label">Email</label>
-  </div>
-  <div class="col-auto">
-    <input type="email" id="inputemail" class="form-control" aria-describedby="emailHelpInline">
-  </div>
-  </div>
-  <div class="w-50">
-    <div class="col-auto">
-    <label for="inputPassword6" class="col-form-label">Password</label>
-  </div>
-  <div class="col-auto">
-    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
-  </div>
-  <div class="col-auto">
-    <span id="passwordHelpInline" class="form-text">
-      Must be 8-20 characters long.
-    </span>
-  </div>
-  </div>
+  <h2>log in</h2>
+  <form>
+    <div class="w-50">
+      <div class="col-auto">
+        <label for="inputemail" class="col-form-label">Email</label>
+      </div>
+      <div class="col-auto">
+        <input [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
+          aria-describedby="emailHelpInline">
+      </div>
+    </div>
+    <div class="w-50">
+      <div class="col-auto">
+        <label for="inputPassword6" class="col-form-label">Password</label>
+      </div>
+      <div class="col-auto">
+        <input [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
+          aria-describedby="passwordHelpInline">
+      </div>
+      <div class="col-auto">
+        <span id="passwordHelpInline" class="form-text">
+          Must be 8-20 characters long.
+        </span>
+      </div>
+    </div>
+    <button (click)="login()" class="btn btn-primary" type="submit">logIn</button>
+    </form>
 </div>

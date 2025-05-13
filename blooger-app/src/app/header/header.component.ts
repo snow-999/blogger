@@ -8,5 +8,18 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  logOut() {
+    const signupBtn = document.getElementById('signup');
+    const loginBtn = document.getElementById('login');
+    const logoutBtn = document.getElementById('logout');
+    const profileNav = document.getElementById('profileNav');
 
+    signupBtn?.classList.remove('hide')
+    loginBtn?.classList.remove('hide')
+    profileNav?.classList.remove('show')
+    profileNav?.classList.add('hide')
+    logoutBtn?.classList.remove('show')
+    logoutBtn?.classList.add('hide')
+    console.log('Logout successful'); 
+  }
 }

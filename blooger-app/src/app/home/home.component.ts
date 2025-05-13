@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
+import { PostsComponent } from '../posts/posts.component';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [PostsComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
 
-  public addLike() {
-    const btn = document.getElementById('likeButton');
-    btn?.classList.toggle('liked');
-  }
+  
 }
