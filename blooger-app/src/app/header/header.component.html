@@ -1,1 +1,25 @@
-<p>header works!</p>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" href="#">profile</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" href="#">login</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" aria-disabled="true">signup</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <router-outlet/>
