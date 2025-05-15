@@ -6,7 +6,7 @@
         <label for="inputemail" class="col-form-label">Email</label>
       </div>
       <div class="col-auto">
-        <input [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
+        <input (submit)="validationEmail()" [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
           aria-describedby="emailHelpInline">
       </div>
     </div>
@@ -15,7 +15,7 @@
         <label for="inputPassword6" class="col-form-label">Password</label>
       </div>
       <div class="col-auto">
-        <input [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
+        <input (submit)="passValidation()" [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
           aria-describedby="passwordHelpInline">
       </div>
       <div class="col-auto">
