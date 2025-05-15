@@ -1,28 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { IndexedDbService } from '../services/indexed-db.service';
+import { posts } from '../posts';
+import { PostService } from '../services/postservices';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
-  imports: [],
+  imports: [CommonModule ],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-constructor(private dbService: IndexedDbService) {}
+constructor(private dbService: IndexedDbService, private postServices : PostService) {}
 
-  saveBtn() {
-    const post = {
-      
-      userName: 'john doe',
-      userId : 1,
-      title: 'My First Blog',
-      content: 'This is an offline blog post',
-      date: new Date().toISOString()
-    }
-    this.dbService.savePost(post);
-    console.log('Post saved:', post);
+  getPosts(): any {
+    return this.postServices.getPosts();
   }
   
+deletePost(postId: string) {
+  this.postServices.deletePost(postId)
+  console.log('Post deleted:', postId);
+}
   
   addLike() {
     const btn = document.getElementById('likeButton');

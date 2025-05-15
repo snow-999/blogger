@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
 import { IndexedDbService } from './services/indexed-db.service';
+
 @Component({
   selector: 'app-root',
   imports: [HeaderComponent],

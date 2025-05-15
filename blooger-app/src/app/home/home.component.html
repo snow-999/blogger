@@ -8,7 +8,7 @@
     <app-new-post (add)="addPost($event)"/>
   }
 </div>
-@for (post of posts; track post.postId) {
+@for (post of post; track post.postId) {
   <app-posts [post]="post"></app-posts>
 }
   
