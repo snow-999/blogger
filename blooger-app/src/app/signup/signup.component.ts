@@ -17,14 +17,25 @@ export class SignupComponent {
   phoneInput = '';
   
   public index = 0;
-  
+
   register() {
+    const signupBtn = document.getElementById('signup');
+    const loginBtn = document.getElementById('login');
+    const logoutBtn = document.getElementById('logout');
+    const profileBtn = document.getElementById('profileBtn');
+
     const isEmailValid = this.emailValidation();
     const isUserValid = this.userValidation();
     const isPassValid = this.passValidation();
     const isPhoneValid = this.phoneValidation();
     
     if (isEmailValid && isUserValid && isPassValid && isPhoneValid) {
+      signupBtn?.classList.add('hide')
+        loginBtn?.classList.add('hide')
+        logoutBtn?.classList.remove('hide')
+      logoutBtn?.classList.add('show')
+      profileBtn?.classList.add('show')
+        profileBtn?.classList.remove('hide')
       console.log('sign up successful');
       this.router.navigate(['']);
 

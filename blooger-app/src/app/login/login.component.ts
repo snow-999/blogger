@@ -27,7 +27,7 @@ export class LoginComponent {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
     const logoutBtn = document.getElementById('logout');
-    const profileNav = document.getElementById('profileNav');
+    const profileBtn = document.getElementById('profileBtn');
     const isEmailValid = this.validationEmail();
     const isPassValid = this.passValidation();
     const userData = localStorage.getItem('user');
@@ -39,11 +39,13 @@ export class LoginComponent {
       
       if (user.email === this.emailInput && user.password === this.passInput && isEmailValid && isPassValid) { 
         signupBtn?.classList.add('hide')
+        signupBtn?.classList.remove('show')
         loginBtn?.classList.add('hide')
+        loginBtn?.classList.remove('show')
         logoutBtn?.classList.remove('hide')
-        profileNav?.classList.remove('hide')
-        profileNav?.classList.add('show')
         logoutBtn?.classList.add('show')
+        profileBtn?.classList.add('show')
+        profileBtn?.classList.remove('hide')
         console.log('Login successful');
         this.router.navigate(['']);
   }

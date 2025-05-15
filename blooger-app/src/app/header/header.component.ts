@@ -13,7 +13,7 @@ export class HeaderComponent {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
     const logoutBtn = document.getElementById('logout');
-    const profileNav = document.getElementById('profileNav');
+    const profileNav = document.getElementById('profileBtn');
 
     signupBtn?.classList.remove('hide')
     loginBtn?.classList.remove('hide')
