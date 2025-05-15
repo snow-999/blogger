@@ -20,6 +20,10 @@ export class ProfileComponent {
     return this.postServices.getPosts();
   }
   
+  getPostsByUserId(userId: string): any {
+    return this.postServices.getPostsByUserId(userId);
+  }
+
   deletePost(postId: string) {
     this.postServices.deletePost(postId)
     console.log('Post deleted:', postId);

@@ -1,9 +1,35 @@
-<nav class="navbar navbar-expand-lg mb-0">
+<nav class="navbar navbar-expand-lg ">
     <div class="container">
       <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" class="navbar-brand">Blog</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      <button (click)="showMiniNav()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span  class="navbar-toggler-icon">
+          
+        </span>
+        
       </button>
+      @if (showMiniMenu) {
+        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link active"
+              aria-current="page">Home</a>
+          </li>
+          <li id="profileNav" class="nav-item" class="hide">
+            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
+          </li>
+          <li id="login" class="nav-item">
+            <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
+          </li>
+          <li id="signup" class="nav-item">
+            <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link"
+              aria-disabled="true">signup</a>
+          </li>
+          <li id="logout" class="hide nav-item">
+            <button (click)="logOut()" class="nav-link" aria-disabled="true">log out</button>
+          </li>
+        </ul>
+        </div>
+      }
       <div class="collapse navbar-collapse mx-0" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto align-items-center">
           <li class="nav-item">
@@ -16,7 +42,7 @@
             <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
           </li>
           <li  id="signup" class="nav-item">
-            <a routerLink="/signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" aria-disabled="true">signup</a>
+            <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" aria-disabled="true">signup</a>
           </li>
           <li  id="logout" class="hide nav-item">
             <button (click)="logOut()" class="nav-link" aria-disabled="true">log out</button>

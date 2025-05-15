@@ -12,6 +12,18 @@ export class PostService {
     return [...this.posts]; // return a copy
   }
 
+  getPostById(id: string): Posts | undefined {
+    return this.posts.find(post => post.postId === id);
+  }
+
+  getPostsByUserId(userId: string): Posts[] {
+    return this.posts.filter(post => post.userId === userId);
+  }
+
+  getPostsByUserName(userName: string): Posts[] {
+    return this.posts.filter(post => post.userName === userName);
+  }
+
   addPost(newPost: newPost) {
       posts.push({
         postId: new Date().getTime().toString(),

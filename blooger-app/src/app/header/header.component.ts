@@ -8,6 +8,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  showMiniMenu = false;
   logOut() {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
@@ -21,5 +22,13 @@ export class HeaderComponent {
     logoutBtn?.classList.remove('show')
     logoutBtn?.classList.add('hide')
     console.log('Logout successful'); 
+  }
+
+  showMiniNav() { 
+    if (this.showMiniMenu) {
+      this.showMiniMenu = false;
+    } else {
+      this.showMiniMenu = true;
+    }
   }
 }
