@@ -25,6 +25,7 @@ export class NewPostComponent {
       content: this.contentInput,
       date: new Date().toLocaleDateString()
     };
+    
     this.postServices.addPost(newPost);
     this.isAdded = false;
   }

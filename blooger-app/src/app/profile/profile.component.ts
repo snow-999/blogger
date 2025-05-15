@@ -15,6 +15,13 @@ import { NewPostComponent } from "../posts/new-post/new-post.component";
 export class ProfileComponent {
   constructor(private dbService: IndexedDbService, private postServices: PostService) { }
   isAdded: boolean = false;
+  
+  getUserName() {
+    const userData = localStorage.getItem('user');
+    const user = userData ? JSON.parse(userData) : null;
+    const userName = user.userName
+    return userName;
+  }
 
   getPosts(): any {
     return this.postServices.getPosts();

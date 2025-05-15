@@ -16,6 +16,8 @@ export class SignupComponent {
   userInput = '';
   phoneInput = '';
   
+  public index = 0;
+  
   register() {
     const isEmailValid = this.emailValidation();
     const isUserValid = this.userValidation();
@@ -30,7 +32,8 @@ export class SignupComponent {
         email: this.emailInput,
         userName: this.userInput,
         password: this.passInput,
-        phoneNumber: this.phoneInput
+        phoneNumber: this.phoneInput,
+        userId: this.index++
       }
       localStorage.setItem('user', JSON.stringify(user));
     } else {
