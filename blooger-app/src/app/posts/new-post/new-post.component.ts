@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { newPost } from '../posts.model';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 })
   
 export class NewPostComponent {
-  @Output() add = new EventEmitter<{title:string, content:string , date:string}>();
+  @Output() add = new EventEmitter<newPost>();
     
     titleInput: string = '';
     contentInput: string = '';

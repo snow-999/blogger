@@ -4,8 +4,11 @@
     <button (click)="isAdded = true" class="btn btn-primary">Add Post</button>
   </div>
 
-  <app-new-post *ngIf="isAdded"></app-new-post>
+  @if (isAdded) {
+    <app-new-post (add)="addPost($event)"/>
+  }
 </div>
-<div *ngFor="let post of posts; let i = index;">
+@for (post of posts; track post.postId) {
   <app-posts [post]="post"></app-posts>
-</div>
+}
+  

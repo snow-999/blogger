@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
-import { Posts } from '../posts/posts.model';
+import { newPost, Posts } from '../posts/posts.model';
 import { CommonModule } from '@angular/common';
 import { NewPostComponent } from '../posts/new-post/new-post.component';
 
@@ -13,14 +13,21 @@ import { NewPostComponent } from '../posts/new-post/new-post.component';
 export class HomeComponent {
   isAdded: boolean = false;
 
-  posts: Posts[] = [
+  posts = [
     { postId: '1', userName: 'john doe', userId: '1', title: 'My First Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
     { postId: '2', userName: 'jane doe', userId: '2', title: 'My Second Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
     { postId: '3', userName: 'john smith', userId: '3', title: 'My Third Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
     { postId: '4', userName: 'jane smith', userId: '4', title: 'My Fourth Blog', content: 'This is an offline blog post', date: new Date().toISOString() },
   ]
 
-  addPost(): Boolean {
-    return this.isAdded = true;
+  addPost(newPost: newPost) {
+    this.posts.push({
+      postId: new Date().getTime().toString(),
+      userName: 'john doe',
+      userId: '1',
+      title: newPost.title,
+      content: newPost.content,
+      date: newPost.date
+    })
   }
 }
