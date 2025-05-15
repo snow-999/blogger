@@ -3,6 +3,7 @@ import { FormControl, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { CommonModule } from '@angular/common';
+import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
 
 @Component({
   selector: 'app-login',
@@ -20,6 +21,7 @@ export class LoginComponent {
     console.log('Email:', this.emailInput);
     console.log('Password:', this.passInput);
   }
+
   
   login() {
     const signupBtn = document.getElementById('signup');
@@ -33,29 +35,28 @@ export class LoginComponent {
 
     if (userData) { 
       const user = JSON.parse(userData);
-      for (let index = 0; index < user.length; index++) {
-        if (user[index].email === this.emailInput && user[index].password === this.passInput && isEmailValid && isPassValid) { 
-          signupBtn?.classList.add('hide')
-          loginBtn?.classList.add('hide')
-          logoutBtn?.classList.remove('hide')
-          profileNav?.classList.remove('hide')
-          profileNav?.classList.add('show')
-          logoutBtn?.classList.add('show')
-          console.log('Login successful');
-          this.router.navigate(['']);
-    }
-    else {
-      alert('Invalid email or password');
-      console.log(this.passInput.length);
-    }
-      }
+      
+      
+      if (user.email === this.emailInput && user.password === this.passInput && isEmailValid && isPassValid) { 
+        signupBtn?.classList.add('hide')
+        loginBtn?.classList.add('hide')
+        logoutBtn?.classList.remove('hide')
+        profileNav?.classList.remove('hide')
+        profileNav?.classList.add('show')
+        logoutBtn?.classList.add('show')
+        console.log('Login successful');
+        this.router.navigate(['']);
+  }
+  else {
+    alert('Invalid email or password');
+    console.log(this.passInput.length);
+  }
       
     }
   }
 
   validationEmail() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
-    console.log(this.emailInput)
     if (emailPattern.test(this.emailInput)) {
       this.inputServices.setInput('email', this.emailInput);
       return true;
@@ -70,6 +71,7 @@ export class LoginComponent {
       this.inputServices.setInput('password', this.passInput);
       return true;
     } else {
+      alert("Please enter valid password")
         return false;
     }
   }
