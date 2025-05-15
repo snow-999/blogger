@@ -2,10 +2,11 @@ import { Component, Input } from '@angular/core';
 import { FormControl, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -19,7 +20,7 @@ export class LoginComponent {
     console.log('Email:', this.emailInput);
     console.log('Password:', this.passInput);
   }
-
+  
   login() {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
@@ -39,9 +40,6 @@ export class LoginComponent {
       console.log('Login successful');
       this.router.navigate(['']);
     }
-    else {
-      alert('Please fill in all fields correctly');
-    }
   }
 
   validationEmail() {
@@ -50,8 +48,7 @@ export class LoginComponent {
       this.inputServices.setInput('email', this.emailInput);
       return true;
     } else {
-      alert('Please enter a valid email address');
-      return false;
+        return false;
     }
   }
 
@@ -60,8 +57,7 @@ export class LoginComponent {
       this.inputServices.setInput('password', this.passInput);
       return true;
     } else {
-      alert('Please enter a valid password');
-      return false;
+        return false;
     }
   }
   

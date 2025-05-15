@@ -6,8 +6,13 @@
         <label for="inputemail" class="col-form-label">Email</label>
       </div>
       <div class="col-auto">
-        <input (submit)="validationEmail()" [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
-          aria-describedby="emailHelpInline">
+        
+        <input (submit)="validationEmail()" required="true" email="" #emailInput="ngModel" [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
+          aria-describedby="emailHelpInline"/>
+          <div *ngIf="emailInput.invalid && emailInput.touched">
+            <div *ngIf="emailInput.errors?.['required']">Email is required.</div>
+            <div *ngIf="emailInput.errors?.['email']">Invalid email format.</div>  
+          </div>  
       </div>
     </div>
     <div class="w-50">
@@ -15,8 +20,12 @@
         <label for="inputPassword6" class="col-form-label">Password</label>
       </div>
       <div class="col-auto">
-        <input (submit)="passValidation()" [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
+        <input required="true" #passInput="ngModel" minlength="8" (submit)="passValidation()" [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
           aria-describedby="passwordHelpInline">
+          <div *ngIf="passInput.invalid && passInput.touched">
+            <div *ngIf="passInput.errors?.['required']">password is required.</div>
+            <div *ngIf="passInput.errors?.['minlength']">Invalid password.</div>
+          </div>
       </div>
       <div class="col-auto">
         <span id="passwordHelpInline" class="form-text">
