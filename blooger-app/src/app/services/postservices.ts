@@ -19,10 +19,14 @@ export class PostService {
   getUserId() {
       const userData = localStorage.getItem('user');
       const user = userData ? JSON.parse(userData) : null;
-      const userId = user.id
+      const userId = user.userId
       return userId;
   }
   
+  getPostId(id:string) {
+    this.posts = this.posts.filter(post => post.postId === id);
+  }
+
   getPosts(): Posts[] {
     return [...this.posts]; // return a copy
   }
@@ -43,11 +47,16 @@ export class PostService {
       posts.push({
         postId: new Date().getTime().toString(),
         userName: this.getUserName(),
-        userId: '1',
+        userId: this.getUserId(),
         title: newPost.title,
         content: newPost.content,
         date: newPost.date
       })
+  }
+  
+  updatePost(id:string, newPost: newPost) {
+    const post = this.getPostById(id);
+    console.log(post)
     }
 
   deletePost(id: string) {

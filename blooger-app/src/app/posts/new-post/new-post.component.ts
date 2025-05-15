@@ -19,7 +19,7 @@ export class NewPostComponent {
     isAdded: boolean = true;
   
   
-  addPost() {
+  addNewPost() {
     const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
