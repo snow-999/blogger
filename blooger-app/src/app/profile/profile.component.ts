@@ -26,7 +26,11 @@ export class ProfileComponent {
   }
 
   makePost() { 
-    this.isAdded = true;
+    if (this.isAdded) {
+      this.isAdded = false;
+    } else {
+      this.isAdded = true;
+    }
   }
   
   addPost(newPost: newPost) {
