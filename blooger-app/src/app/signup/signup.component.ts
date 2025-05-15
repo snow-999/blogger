@@ -23,6 +23,7 @@ export class SignupComponent {
     const loginBtn = document.getElementById('login');
     const logoutBtn = document.getElementById('logout');
     const profileBtn = document.getElementById('profileBtn');
+    const profileBtnMin = document.getElementById('profileBtnMin');
 
     const isEmailValid = this.emailValidation();
     const isUserValid = this.userValidation();
@@ -33,9 +34,11 @@ export class SignupComponent {
       signupBtn?.classList.add('hide')
         loginBtn?.classList.add('hide')
         logoutBtn?.classList.remove('hide')
-      logoutBtn?.classList.add('show')
-      profileBtn?.classList.add('show')
-        profileBtn?.classList.remove('hide')
+        logoutBtn?.classList.add('show')
+        profileBtn?.classList.add('show')
+      profileBtn?.classList.remove('hide')
+      profileBtnMin?.classList.add('show')
+        profileBtnMin?.classList.remove('hide')
       console.log('sign up successful');
       this.router.navigate(['']);
 

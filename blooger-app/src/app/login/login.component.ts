@@ -28,6 +28,7 @@ export class LoginComponent {
     const loginBtn = document.getElementById('login');
     const logoutBtn = document.getElementById('logout');
     const profileBtn = document.getElementById('profileBtn');
+    const profileBtnMin = document.getElementById('profileBtnMin');
     const isEmailValid = this.validationEmail();
     const isPassValid = this.passValidation();
     const userData = localStorage.getItem('user');
@@ -46,6 +47,8 @@ export class LoginComponent {
         logoutBtn?.classList.add('show')
         profileBtn?.classList.add('show')
         profileBtn?.classList.remove('hide')
+        profileBtnMin?.classList.add('show')
+        profileBtnMin?.classList.remove('hide')
         console.log('Login successful');
         this.router.navigate(['']);
   }

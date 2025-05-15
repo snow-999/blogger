@@ -14,6 +14,7 @@ export class HeaderComponent {
     const loginBtn = document.getElementById('login');
     const logoutBtn = document.getElementById('logout');
     const profileNav = document.getElementById('profileBtn');
+    const profileBtnMin = document.getElementById('profileBtnMin');
 
     signupBtn?.classList.remove('hide')
     loginBtn?.classList.remove('hide')
@@ -21,6 +22,8 @@ export class HeaderComponent {
     profileNav?.classList.add('hide')
     logoutBtn?.classList.remove('show')
     logoutBtn?.classList.add('hide')
+    profileBtnMin?.classList.remove('show')
+    profileBtnMin?.classList.add('hide')
     console.log('Logout successful'); 
   }
 
