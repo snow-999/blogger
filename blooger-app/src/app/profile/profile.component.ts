@@ -3,7 +3,7 @@ import { IndexedDbService } from '../services/indexed-db.service';
 import { posts } from '../posts';
 import { PostService } from '../services/postservices';
 import { CommonModule } from '@angular/common';
-import { newPost } from '../posts/posts.model';
+import { newPost, Posts } from '../posts/posts.model';
 import { NewPostComponent } from "../posts/new-post/new-post.component";
 
 @Component({
@@ -43,6 +43,12 @@ export class ProfileComponent {
       this.isAdded = true;
     }
   }
+
+  getPostById(id: string): Posts | undefined {
+    return this.postServices.getPostById(id);
+  }
+
+  
   
   addPost(newPost: newPost) {
     this.postServices.addPost(newPost);
