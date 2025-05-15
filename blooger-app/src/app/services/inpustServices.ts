@@ -5,8 +5,8 @@ import { Injectable } from "@angular/core";
 export class InputService {
     private inputs: { [key: string]: string } = {
         userName: '',
-        email: '',
-        password: '',
+        emailInput: '',
+        passwordInput: '',
         phoneNumber: ''
     };
 

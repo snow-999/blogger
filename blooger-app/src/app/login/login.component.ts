@@ -28,26 +28,39 @@ export class LoginComponent {
     const profileNav = document.getElementById('profileNav');
     const isEmailValid = this.validationEmail();
     const isPassValid = this.passValidation();
-    
-    
-    if (isEmailValid && isPassValid) {
-      signupBtn?.classList.add('hide')
-      loginBtn?.classList.add('hide')
-      logoutBtn?.classList.remove('hide')
-      profileNav?.classList.remove('hide')
-      profileNav?.classList.add('show')
-      logoutBtn?.classList.add('show')
-      console.log('Login successful');
-      this.router.navigate(['']);
+    const userData = localStorage.getItem('user');
+
+
+    if (userData) { 
+      const user = JSON.parse(userData);
+      for (let index = 0; index < user.length; index++) {
+        if (user[index].email === this.emailInput && user[index].password === this.passInput && isEmailValid && isPassValid) { 
+          signupBtn?.classList.add('hide')
+          loginBtn?.classList.add('hide')
+          logoutBtn?.classList.remove('hide')
+          profileNav?.classList.remove('hide')
+          profileNav?.classList.add('show')
+          logoutBtn?.classList.add('show')
+          console.log('Login successful');
+          this.router.navigate(['']);
+    }
+    else {
+      alert('Invalid email or password');
+      console.log(this.passInput.length);
+    }
+      }
+      
     }
   }
 
   validationEmail() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
+    console.log(this.emailInput)
     if (emailPattern.test(this.emailInput)) {
       this.inputServices.setInput('email', this.emailInput);
       return true;
     } else {
+      alert('Please enter a valid email address');
         return false;
     }
   }

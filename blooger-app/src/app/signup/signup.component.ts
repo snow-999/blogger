@@ -25,12 +25,16 @@ export class SignupComponent {
     if (isEmailValid && isUserValid && isPassValid && isPhoneValid) {
       console.log('sign up successful');
       this.router.navigate(['']);
+
+      const user = {
+        email: this.emailInput,
+        userName: this.userInput,
+        password: this.passInput,
+        phoneNumber: this.phoneInput
+      }
+      localStorage.setItem('user', JSON.stringify(user));
     } else {
       alert('Please fill in all fields correctly');
-    }
-    if (this.passInput.length > 8 && this.emailInput.includes('@example.com')) {
-      
-      
     }
   }
 
