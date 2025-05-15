@@ -5,3 +5,15 @@
 .show{
     display: block;
 }
+
+.active {
+    color :#0B5ED7;
+    background-color: #0B5ED7;
+    border: 1px solid #0B5ED7;
+    border-radius: 10px;
+    color: white;
+}
+
+.nav-link.active {
+    color: white;
+}
