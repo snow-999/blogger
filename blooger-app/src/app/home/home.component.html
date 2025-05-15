@@ -1,7 +1,7 @@
 <div class="card w-100 mb-3">
   <div class="card-body">
     <p class="card-text">Adding a New Post?</p>
-    <button (click)="isAdded = true" class="btn btn-primary">Add Post</button>
+    <button id="addBtn" (click)="makePost()" class="btn btn-primary">Add Post</button>
   </div>
 
   @if (isAdded) {

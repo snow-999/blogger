@@ -18,9 +18,16 @@ export class HomeComponent {
 
 post = posts
 
-  addPost(newPost: newPost) {
-    this.postServices.addPost(newPost);
+  makePost() {
+   if (this.isAdded) {
+     this.isAdded = false;
+   }else {
+     this.isAdded = true;
+   }
   }
 
   
+  addPost(newPost: newPost) {
+    this.postServices.addPost(newPost);
+  }
 }
