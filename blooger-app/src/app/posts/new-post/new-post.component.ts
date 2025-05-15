@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { newPost } from '../posts.model';
+import { PostService } from '../../services/postservices';
 
 
 @Component({
@@ -11,20 +12,21 @@ import { newPost } from '../posts.model';
 })
   
 export class NewPostComponent {
-  @Output() add = new EventEmitter<newPost>();
-    
+  constructor(private postServices: PostService) { }
+  
     titleInput: string = '';
     contentInput: string = '';
     isAdded: boolean = true;
   
   
   addPost() {
-    this.add.emit({
+    const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
-      date: new Date().toISOString()
-    });
-    console.log('Post added:',  this.titleInput)
+      date: new Date().toLocaleDateString()
+    };
+    this.postServices.addPost(newPost);
+    this.isAdded = false;
   }
-
+  
 }

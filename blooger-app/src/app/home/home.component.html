@@ -5,7 +5,7 @@
   </div>
 
   @if (isAdded) {
-    <app-new-post (add)="addPost($event)"/>
+    <app-new-post/>
   }
 </div>
 @for (post of post; track post.postId) {

@@ -9,9 +9,14 @@
 <div class="card w-100 mb-3">
   <div class="card-body">
     <p class="card-text">Adding a New Post?</p>
-    <button class="btn btn-primary">Add Post</button>
+    <button (click)="makePost()" class="btn btn-primary">Add Post</button>
   </div>
 </div>
+
+
+@if (isAdded) {
+  <app-new-post/>
+}
 
 <h3>My Posts</h3>
 <div *ngFor="let post of getPosts(); let i = index" class="card w-100 mb-3">
