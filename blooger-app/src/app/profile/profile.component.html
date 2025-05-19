@@ -30,9 +30,9 @@
         <button (click)="getEditForm(post.postId)" type="button" id="updateButton" class=" btn btn-primary">Update</button>
         <button (click)="deletePost(post.postId)" type="button" id="deleteButton" class="btn btn btn-danger">delete</button>
       </div>
-      @if(isEdit){
-        <app-edit-post />
-      }
     </div>
   </div>
+  @if(isEdit){
+    <app-edit-post />
+  }
 }

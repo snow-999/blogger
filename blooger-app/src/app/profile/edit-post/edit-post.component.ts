@@ -17,12 +17,13 @@ export class EditPostComponent {
   titleInput = ""
   
   updatePost() {
+    const post = localStorage.getItem("post")
+    console.log(post)
     const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
       date: new Date().toLocaleDateString()
     };
-    
     this.postServices.addPost(newPost);
     
   }

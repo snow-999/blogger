@@ -79,20 +79,22 @@ export class ProfileComponent {
     return this.postServices.getPostById(id);
   }
 
-  getEditForm(id:string) {
-    this.post = this.post.filter((post) => {
-      if (post.postId === id) {
+  getEditForm(id: string) {
+    const myPost = this.getPostById(id)
+    console.log(myPost);
+    
+      if (myPost?.postId == id) {
+        console.log("===================")
+        console.log(id)
+        console.log(myPost.postId)
+        console.log("===================")
         if (!this.isEdit) {
-          
           this.isEdit = true;
         } else {
           this.isEdit = false;
-        }
-
       }
-    });
+    }
   }
-
   
   addPost(newPost: newPost) {
     this.postServices.addPost(newPost);
