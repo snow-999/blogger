@@ -16,7 +16,7 @@ export class HomeComponent {
 
   constructor(private postServices: PostService) {}
 
-post = posts
+posts = posts
 
   makePost() {
    if (this.isAdded) {

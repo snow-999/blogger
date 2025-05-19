@@ -29,8 +29,7 @@ export class LoginComponent {
     const logoutBtn = document.getElementById('logout');
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnMin = document.getElementById('profileBtnMin');
-    const isEmailValid = this.validationEmail();
-    const isPassValid = this.passValidation();
+    const isValid = this.isValid("email")&&this.isValid("pass");
     const userData = localStorage.getItem('user');
 
 
@@ -38,7 +37,7 @@ export class LoginComponent {
       const user = JSON.parse(userData);
       
       
-      if (user.email === this.emailInput && user.password === this.passInput && isEmailValid && isPassValid) { 
+      if (user.email === this.emailInput && user.password === this.passInput && isValid) { 
         signupBtn?.classList.add('hide')
         signupBtn?.classList.remove('show')
         loginBtn?.classList.add('hide')
@@ -60,25 +59,30 @@ export class LoginComponent {
     }
   }
 
-  validationEmail() {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
-    if (emailPattern.test(this.emailInput)) {
-      this.inputServices.setInput('email', this.emailInput);
-      return true;
-    } else {
-      alert('Please enter a valid email address');
-        return false;
-    }
-  }
 
-  passValidation() {
-    if (this.passInput.length > 8) {
-      this.inputServices.setInput('password', this.passInput);
+  isValid(fieldName:string) {
+    switch (fieldName) {
+      case "pass": { 
+        if (this.passInput.length > 8) {
+          this.inputServices.setInput('password', this.passInput);
+          return true;
+        } else {
+            return false;
+        }
+      }
+      case "email": {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
+        if (emailPattern.test(this.emailInput)) {
+          this.inputServices.setInput('email', this.emailInput);
       return true;
     } else {
-      alert("Please enter valid password")
+      
         return false;
     }
+        }
+        default: {return false}
+    }
+    
   }
   
 }

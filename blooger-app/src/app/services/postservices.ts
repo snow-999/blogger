@@ -24,7 +24,7 @@ export class PostService {
   }
   
   getPostId(id:string) {
-    this.posts = this.posts.filter(post => post.postId === id);
+   return this.posts.filter(post => post.postId === id);
   }
 
   getPosts(): Posts[] {
@@ -44,7 +44,8 @@ export class PostService {
   }
 
   addPost(newPost: newPost) {
-      posts.push({
+    const oldPosts = this.getPosts();
+      oldPosts.push({
         postId: new Date().getTime().toString(),
         userName: this.getUserName(),
         userId: this.getUserId(),
@@ -52,10 +53,12 @@ export class PostService {
         content: newPost.content,
         date: newPost.date
       })
+    this.posts = oldPosts
   }
   
   updatePost(id:string, newPost: newPost) {
     const post = this.getPostById(id);
+
     console.log(post)
     }
 

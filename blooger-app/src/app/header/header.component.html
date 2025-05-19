@@ -28,26 +28,30 @@
           </li>
         </ul>
         </div>
+      } @else {
+        <div class="collapse navbar-collapse mx-0" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto align-items-center">
+            <li class="nav-item">
+              <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                ariaCurrentWhenActive="page" class="nav-link">Home</a>
+            </li>
+            <li id="profileBtn" class="nav-item" class="hide">
+              <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
+            </li>
+            <li id="login" class="nav-item">
+              <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
+            </li>
+            <li id="signup" class="nav-item">
+              <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link"
+                aria-disabled="true">signup</a>
+            </li>
+            <li id="logout" class="hide nav-item">
+              <button (click)="logOut()" class="nav-link" aria-disabled="true">log out</button>
+            </li>
+          </ul>
+          </div>
       }
-      <div class="collapse navbar-collapse mx-0" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto align-items-center">
-          <li class="nav-item">
-            <a routerLink="" routerLinkActive="active"  [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page" class="nav-link">Home</a>
-          </li>
-          <li id="profileBtn" class="nav-item" class="hide">
-            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
-          </li>
-          <li id="login" class="nav-item">
-            <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
-          </li>
-          <li id="signup" class="nav-item">
-            <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link" aria-disabled="true">signup</a>
-          </li>
-          <li  id="logout" class="hide nav-item">
-            <button (click)="logOut()" class="nav-link" aria-disabled="true">log out</button>
-          </li>
-        </ul>
-      </div>
+     
     </div>
   </nav>
   <router-outlet/>
