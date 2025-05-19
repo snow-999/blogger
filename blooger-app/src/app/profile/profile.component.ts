@@ -17,6 +17,7 @@ export class ProfileComponent {
   constructor(private dbService: IndexedDbService, private postServices: PostService) { }
   isAdded: boolean = false;
   isEdit: boolean = false;
+  isLiked: boolean = false;
 
   private post = posts
   
@@ -32,6 +33,26 @@ export class ProfileComponent {
     const userId = user.userId
     return userId;
   }
+
+  isHighlighted = false;
+  getPostClass(id: string) {
+    
+    return this.postServices.getPostById(id)?.postId;
+  }
+
+  
+  getDynamicStyles(id : string) {
+    const postClass = this.getPostClass(id) ?? '';
+    const btn = document.getElementsByClassName(postClass)
+    if (!this.isHighlighted) {
+      this.isHighlighted = true;
+      btn[0].classList.add("liked")
+    } else {
+      this.isHighlighted = false;
+      btn[0].classList.remove("liked")
+    }
+  }
+  
 
   getPosts(): any {
     return this.postServices.getPosts();
