@@ -16,7 +16,11 @@ export class HomeComponent {
 
   constructor(private postServices: PostService) {}
 
-posts = posts
+  posts = posts
+  
+  getAllPosts() {
+    return this.postServices.getPosts();
+  }
 
   makePost() {
    if (this.isAdded) {

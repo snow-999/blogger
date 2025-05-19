@@ -54,6 +54,7 @@ export class PostService {
         date: newPost.date
       })
     this.posts = oldPosts
+    localStorage.setItem("post", JSON.stringify(posts))
   }
   
   updatePost(id:string, newPost: newPost) {

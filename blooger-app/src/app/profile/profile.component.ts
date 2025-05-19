@@ -62,6 +62,7 @@ export class ProfileComponent {
     this.post = this.post.filter((post) => {
       if (post.postId === id) {
         if (!this.isEdit) {
+          
           this.isEdit = true;
         } else {
           this.isEdit = false;
