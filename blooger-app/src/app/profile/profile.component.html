@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  @if(isEdit){
-    <app-edit-post />
+  @if(post.isEdited){
+    <app-edit-post [post]="post"/>
   }
 }

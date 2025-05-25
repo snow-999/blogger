@@ -82,17 +82,12 @@ export class ProfileComponent {
   getEditForm(id: string) {
     const myPost = this.getPostById(id)
     console.log(myPost);
-    
       if (myPost?.postId == id) {
-        console.log("===================")
-        console.log(id)
-        console.log(myPost.postId)
-        console.log("===================")
-        if (!this.isEdit) {
-          this.isEdit = true;
+        if (!myPost.isEdited) {
+          myPost.isEdited = true;
         } else {
-          this.isEdit = false;
-      }
+          myPost.isEdited = false;
+        }
     }
   }
   

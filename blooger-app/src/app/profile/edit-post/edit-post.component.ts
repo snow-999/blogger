@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { newPost } from '../../posts/posts.model';
-import { PostService } from '../../services/postservices';
+
 
 @Component({
   selector: 'app-edit-post',
@@ -12,19 +12,16 @@ import { PostService } from '../../services/postservices';
 })
   
 export class EditPostComponent {
-  constructor(private postServices: PostService){}
   contentInput = ""
   titleInput = ""
+  @Input() post?: newPost;
   
   updatePost() {
-    const post = localStorage.getItem("post")
-    console.log(post)
-    const newPost: newPost = {
-      title: this.titleInput,
-      content: this.contentInput,
-      date: new Date().toLocaleDateString()
-    };
-    this.postServices.addPost(newPost);
+    if (this.post) {
+      this.post.title = this.titleInput;
+      this.post.content = this.contentInput
+      this.post.date = new Date().toLocaleDateString()
+    }
     
   }
 }

@@ -51,7 +51,8 @@ export class PostService {
         userId: this.getUserId(),
         title: newPost.title,
         content: newPost.content,
-        date: newPost.date
+        date: newPost.date,
+        isEdited: false
       })
     this.posts = oldPosts
     localStorage.setItem("post", JSON.stringify(posts))
