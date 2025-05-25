@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
 
 
+
 @Component({
   selector: 'app-root',
   imports: [HeaderComponent],
@@ -10,12 +11,5 @@ import { HeaderComponent } from "./header/header.component";
 })
 export class AppComponent {
   title = 'blogger-app';
-
-post = {
-      userName: 'john doe',
-      userId : 1,
-      title: 'My First Blog',
-      content: 'This is an offline blog post',
-      date: new Date().toISOString()
-    }
+    
 }

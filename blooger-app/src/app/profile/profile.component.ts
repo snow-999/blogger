@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { posts } from '../posts';
 import { PostService } from '../services/postservices';
 import { CommonModule } from '@angular/common';
-import { newPost, Posts } from '../posts/posts.model';
+import { newPost, Posts } from '../models/posts.model';
 import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
 

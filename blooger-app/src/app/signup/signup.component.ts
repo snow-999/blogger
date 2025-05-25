@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
+import { User } from '../models/user.model';
+import { IndexedDBService } from '../services/indexdbServices';
+
 
 @Component({
   selector: 'app-signup',
@@ -9,12 +12,28 @@ import { InputService } from '../services/inpustServices';
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
+  
+  
+  
+  
+  
 export class SignupComponent {
-  constructor(private router: Router, private inputServices: InputService) {}
+  constructor(private router: Router, private inputServices: InputService, private indexedDBService: IndexedDBService) {}
   passInput = '';
   emailInput = '';
   userInput = '';
   phoneInput = '';
+  users: any[] = [];
+  newUser: any = { id: 0, name: '', email: '' };
+
+
+
+  // Add a user to the database
+  addUser() {
+    this.indexedDBService.addUser(this.newUser);
+  }
+
+  
   
   public index = 0;
 
@@ -42,14 +61,14 @@ export class SignupComponent {
       console.log('sign up successful');
       this.router.navigate(['']);
 
-      const user = {
+      const user: User = {
         email: this.emailInput,
         userName: this.userInput,
         password: this.passInput,
         phoneNumber: this.phoneInput,
         userId: this.index++
       }
-      localStorage.setItem('user', JSON.stringify(user));
+      this.addUser()
     } else {
       alert('Please fill in all fields correctly');
     }

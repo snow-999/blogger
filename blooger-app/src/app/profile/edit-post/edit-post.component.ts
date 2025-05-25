@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { newPost } from '../../posts/posts.model';
+import { newPost } from '../../models/posts.model';
 
 
 @Component({

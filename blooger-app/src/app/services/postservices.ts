@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import {posts} from '../posts';
-import {newPost, Posts} from '../posts/posts.model'
+import {newPost, Posts} from '../models/posts.model'
 
 
 @Injectable({ providedIn: 'root' })
