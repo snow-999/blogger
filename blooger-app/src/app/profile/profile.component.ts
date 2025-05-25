@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { IndexedDbService } from '../services/indexed-db.service';
 import { posts } from '../posts';
 import { PostService } from '../services/postservices';
 import { CommonModule } from '@angular/common';
@@ -14,7 +13,7 @@ import { EditPostComponent } from "./edit-post/edit-post.component";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  constructor(private dbService: IndexedDbService, private postServices: PostService) { }
+  constructor( private postServices: PostService) { }
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;

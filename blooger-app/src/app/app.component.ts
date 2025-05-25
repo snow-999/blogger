@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
-import { IndexedDbService } from './services/indexed-db.service';
+
 
 @Component({
   selector: 'app-root',
@@ -18,14 +18,4 @@ post = {
       content: 'This is an offline blog post',
       date: new Date().toISOString()
     }
-
-constructor(private dbService: IndexedDbService) {}
-
-  ngOnInit(): void {
-    
-
-    this.dbService.getAllPosts().then(posts => {
-      console.log('📚 Blog Posts:', posts);
-    });
-  }
 }
