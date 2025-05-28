@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { User } from '../models/user.model';
-import { IndexedDBService } from '../services/indexdbServices';
+import { userService } from '../services/userServices';
+
+
+
+
+
 
 
 @Component({
@@ -13,29 +18,28 @@ import { IndexedDBService } from '../services/indexdbServices';
   styleUrl: './signup.component.css'
 })
   
-  
+
+
   
   
   
 export class SignupComponent {
-  constructor(private router: Router, private inputServices: InputService, private indexedDBService: IndexedDBService) {}
-  passInput = '';
-  emailInput = '';
-  userInput = '';
+  constructor(private router: Router, private inputServices: InputService, private userServices: userService) {}
   phoneInput = '';
   users: any[] = [];
-  newUser: any = { id: 0, name: '', email: '' };
+  index = 0;
+  newUser: any = { name: '', email: '' , password:'', phoneNumber:''};
 
-
-
-  // Add a user to the database
   addUser() {
-    this.indexedDBService.addUser(this.newUser);
+    const user: User = {
+      email: this.newUser.email,
+      userName: this.newUser.name,
+      password: this.newUser.password,
+      phoneNumber: this.newUser.phoneNumber,
+      userId: this.index++
+    }
+    this.userServices.addUser(user).subscribe().add();
   }
-
-  
-  
-  public index = 0;
 
   register() {
     const signupBtn = document.getElementById('signup');
@@ -59,15 +63,7 @@ export class SignupComponent {
       profileBtnMin?.classList.add('show')
         profileBtnMin?.classList.remove('hide')
       console.log('sign up successful');
-      this.router.navigate(['']);
-
-      const user: User = {
-        email: this.emailInput,
-        userName: this.userInput,
-        password: this.passInput,
-        phoneNumber: this.phoneInput,
-        userId: this.index++
-      }
+      this.router.navigate(['']);      
       this.addUser()
     } else {
       alert('Please fill in all fields correctly');
@@ -76,8 +72,8 @@ export class SignupComponent {
 
   emailValidation() {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
-    if (emailPattern.test(this.emailInput)) {
-      this.inputServices.setInput('email', this.emailInput);
+    if (emailPattern.test(this.newUser.email)) {
+      this.inputServices.setInput('email', this.newUser.email);
 
       return true;
     } else {
@@ -87,8 +83,8 @@ export class SignupComponent {
   }
 
   userValidation() {
-    if (this.userInput.length > 3) {
-      this.inputServices.setInput('userName', this.userInput);
+    if (this.newUser.name.length > 3) {
+      this.inputServices.setInput('userName', this.newUser.name);
       return true;
     } else {
       alert('Please enter a valid username');
@@ -97,8 +93,8 @@ export class SignupComponent {
   }
 
   passValidation() {
-    if (this.passInput.length > 8) {
-      this.inputServices.setInput('password', this.passInput);
+    if (this.newUser.password.length > 8) {
+      this.inputServices.setInput('password', this.newUser.password);
       return true;
     } else {
       alert('Please enter a valid password');
@@ -107,8 +103,8 @@ export class SignupComponent {
   }
   phoneValidation() {
     const phonePattern = /^\d{10}$/;
-    if (phonePattern.test(this.phoneInput)) {
-      this.inputServices.setInput('phoneNumber', this.phoneInput);
+    if (phonePattern.test(this.newUser.phoneNumber)) {
+      this.inputServices.setInput('phoneNumber', this.newUser.phoneNumber);
       return true;
     } else {
       alert('Please enter a valid phone number');

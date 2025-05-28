@@ -1,12 +1,12 @@
 <div class="row flex-column align-items-center ">
   <h2>sign up</h2>
-  <form action="">
+  <form >
     <div class="w-50">
       <div class="col-auto">
         <label for="inputusername" class="col-form-label">User Name</label>
       </div>
       <div class="col-auto">
-        <input (submit)="userValidation()" [(ngModel)]="userInput" name="userInput" type="text" id="inputusername" class="form-control"
+        <input (submit)="userValidation()" [(ngModel)]="newUser.name" name="newUser.Name" type="text" id="inputusername" class="form-control"
           aria-describedby="userinputusernameHelpInline">
       </div>
     </div>
@@ -15,7 +15,7 @@
         <label for="inputphone" class="col-form-label">Phone Number</label>
       </div>
       <div class="col-auto">
-        <input (submit)="phoneValidation()" [(ngModel)]="phoneInput" name="phoneInput" type="tel" id="inputphone" class="form-control"
+        <input (submit)="phoneValidation()" [(ngModel)]="newUser.phoneNumber" name="newUser.phoneNumber" type="tel" id="inputphone" class="form-control"
           aria-describedby="phoneHelpInline">
       </div>
     </div>
@@ -24,7 +24,7 @@
         <label for="inputemail" class="col-form-label">Email</label>
       </div>
       <div class="col-auto">
-        <input (submit)="emailValidation()" [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
+        <input (submit)="emailValidation()" [(ngModel)]="newUser.email" name="newUser.email" type="email" id="inputemail" class="form-control"
           aria-describedby="emailHelpInline">
       </div>
     </div>
@@ -33,7 +33,7 @@
         <label for="inputPassword6" class="col-form-label">Password</label>
       </div>
       <div class="col-auto">
-        <input (submit)="passValidation()" [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
+        <input (submit)="passValidation()" [(ngModel)]="newUser.password" name="newUser.password" type="password" id="inputPassword6" class="form-control"
           aria-describedby="passwordHelpInline">
       </div>
       <div class="col-auto">
@@ -42,6 +42,6 @@
         </span>
       </div>
     </div>
-    <button (click)="register()" type="submit" class="btn btn-primary">Sign Up</button>
+    <button (click)="register()" type="button" class="btn btn-primary">Sign Up</button>
   </form>
 </div>

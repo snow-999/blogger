@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { newPost, Posts } from '../models/posts.model';
 import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
+import { userService } from '../services/userServices';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-profile',
@@ -13,25 +15,32 @@ import { EditPostComponent } from "./edit-post/edit-post.component";
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  constructor( private postServices: PostService) { }
+  constructor( private postServices: PostService, private userServices: userService) { }
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;
+  user:any =[]
 
   private post = posts
-  
-  getUserName() {
-    const userData = localStorage.getItem('user');
-    const user = userData ? JSON.parse(userData) : null;
-    const userName = user.userName
-    return userName;
+  getUser() {
+    this.userServices.getUserById(1).subscribe((key) => {
+      this.user = key
+    });
+    console.log(this.user);
+    
   }
-  getUserId() {
-    const userData = localStorage.getItem('user');
-    const user = userData ? JSON.parse(userData) : null;
-    const userId = user.userId
-    return userId;
-  }
+
+  // getUserName() {
+  //   this.userServices.getUserById(1).subscribe((key => {
+  //     console.log(key);
+  //   }));
+  // }
+  // getUserId() {
+  //   const userData = localStorage.getItem('user');
+  //   const user = userData ? JSON.parse(userData) : null;
+  //   const userId = user.userId
+  //   return userId;
+  // }
 
   isHighlighted = false;
   getPostClass(id: string) {

@@ -1,0 +1,36 @@
+// people.service.ts
+import { ApplicationConfig, Injectable, NgModule } from '@angular/core';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
+
+interface User {
+  userId:number;
+  userName: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class userService {
+  constructor(private dbService: NgxIndexedDBService) {}
+
+  addUser(user: User) {
+    return this.dbService.add('user', user);
+  }
+
+  getAllUsers() {
+    return this.dbService.getAll('user');
+  }
+
+  getUserById(id: number) {
+    return this.dbService.getByKey('user', id);
+  }
+
+  deleteUser(id: number) {
+    return this.dbService.delete('user', id);
+  }
+}
