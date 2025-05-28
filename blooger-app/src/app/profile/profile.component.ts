@@ -19,15 +19,14 @@ export class ProfileComponent {
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;
-  user:any =[]
+  user: any;
 
   private post = posts
-  getUser() {
+  getUserName() {
     this.userServices.getUserById(1).subscribe((key) => {
       this.user = key
     });
-    console.log(this.user);
-    
+    console.log(this.user.userName);
   }
 
   // getUserName() {

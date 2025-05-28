@@ -28,17 +28,19 @@ export class SignupComponent {
   phoneInput = '';
   users: any[] = [];
   index = 0;
-  newUser: any = { name: '', email: '' , password:'', phoneNumber:''};
+  newUser: any = { userName: '', email: '' , password:'', phoneNumber:''};
 
   addUser() {
     const user: User = {
       email: this.newUser.email,
-      userName: this.newUser.name,
+      userName: this.newUser.userName,
       password: this.newUser.password,
       phoneNumber: this.newUser.phoneNumber,
-      userId: this.index++
     }
-    this.userServices.addUser(user).subscribe().add();
+    this.userServices.addUser(user).subscribe({
+      next: () => console.log('User added successfully'),
+      error: err => console.error('Error adding user:', err)
+    });
   }
 
   register() {
@@ -83,7 +85,7 @@ export class SignupComponent {
   }
 
   userValidation() {
-    if (this.newUser.name.length > 3) {
+    if (this.newUser.userName.length > 3) {
       this.inputServices.setInput('userName', this.newUser.name);
       return true;
     } else {

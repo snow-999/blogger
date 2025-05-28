@@ -2,15 +2,7 @@
 import { ApplicationConfig, Injectable, NgModule } from '@angular/core';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
 import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
-
-interface User {
-  userId:number;
-  userName: string;
-  email: string;
-  password: string;
-  phoneNumber: string;
-}
-
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
