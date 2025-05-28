@@ -2,25 +2,33 @@
 import { Injectable } from '@angular/core';
 import {posts} from '../posts';
 import {newPost, Posts} from '../models/posts.model'
+import { userService } from './userServices';
 
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
     private posts = posts;
-
+    user: any
+  
+  constructor(private userServices: userService) {}
   
   getUserName() {
-      const userData = localStorage.getItem('user');
-      const user = userData ? JSON.parse(userData) : null;
-      const userName = user.userName
+    const userId = localStorage.getItem("userId")
+    let userName: string = "";
+      if (userId) {
+        this.userServices.getUserById(Number(userId)).subscribe((data) => {
+          this.user = data;
+          userName = this.user.userName
+          console.log(userName);
+        }, error => {
+          console.error('Failed to get user:', error);
+        });
+      }
       return userName;
-  }
+    }
   
   getUserId() {
-      const userData = localStorage.getItem('user');
-      const user = userData ? JSON.parse(userData) : null;
-      const userId = user.userId
-      return userId;
+      return String(localStorage.getItem("userId"));
   }
   
   getPostId(id:string) {

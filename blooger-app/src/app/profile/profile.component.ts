@@ -33,6 +33,8 @@ export class ProfileComponent {
     if (userId) {
       this.userServices.getUserById(Number(userId)).subscribe((data) => {
         this.user = data as User;
+        
+        
       }, error => {
         console.error('Failed to get user:', error);
       });
