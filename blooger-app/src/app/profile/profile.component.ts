@@ -30,12 +30,15 @@ export class ProfileComponent {
 
 
   getUserName() {
-    this.userServices.getUserById("1").subscribe((key) => {
-      this.user = key;
-      console.log(this.user);
-    }, error => {
-      console.error('Failed to get user:', error);
-    });
+    const userId = localStorage.getItem("userId")
+    if (userId) {
+      this.userServices.getUserById(Number(userId)).subscribe((data) => {
+        this.user = data;
+      }, error => {
+        console.error('Failed to get user:', error);
+      });
+
+    }
   }
 
 

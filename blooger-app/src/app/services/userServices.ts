@@ -19,7 +19,7 @@ export class userService {
     return this.dbService.getAll('user');
   }
 
-  getUserById(id: string) {
+  getUserById(id: number) {
     return this.dbService.getByKey('user', id);
   }
 
