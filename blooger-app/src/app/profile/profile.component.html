@@ -18,7 +18,7 @@
 }
 
 <h3>My Posts</h3>
-@for (post of getPostsByUserId(user?.userId); track post.postId) {
+@for (post of getPostsByUserId(user?.userId ?? 0); track post.postId) {
   <div class="card w-100 mb-3">
     <div class="card-body">
       <h5 class="card-title">{{ post?.userName }}</h5>

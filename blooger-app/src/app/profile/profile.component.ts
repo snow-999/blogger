@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { posts } from '../posts';
 import { PostService } from '../services/postservices';
 import { CommonModule } from '@angular/common';
 import { newPost, Posts } from '../models/posts.model';
@@ -7,7 +6,7 @@ import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
-import { SignupComponent } from '../signup/signup.component';
+
 
 
 @Component({
@@ -33,11 +32,10 @@ export class ProfileComponent {
     const userId = localStorage.getItem("userId")
     if (userId) {
       this.userServices.getUserById(Number(userId)).subscribe((data) => {
-        this.user = data;
+        this.user = data as User;
       }, error => {
         console.error('Failed to get user:', error);
       });
-
     }
   }
 
@@ -47,10 +45,12 @@ export class ProfileComponent {
     return this.postServices.getPostById(id)?.postId;
   }
 
+
+  
   
   getDynamicStyles(id : string) {
     const postClass = this.getPostClass(id) ?? '';
-    const btn = document.getElementsByClassName(postClass)
+    const btn = document.getElementsByClassName(postClass.toString())
     if (!this.isHighlighted) {
       this.isHighlighted = true;
       btn[0].classList.add("liked")
