@@ -7,6 +7,8 @@ import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
+import { SignupComponent } from '../signup/signup.component';
+
 
 @Component({
   selector: 'app-profile',
@@ -16,34 +18,29 @@ import { User } from '../models/user.model';
 })
 export class ProfileComponent {
   constructor( private postServices: PostService, private userServices: userService) { }
+  
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;
-  user: any;
+  user: any
 
-  private post = posts
-  getUserName() {
-    this.userServices.getUserById(1).subscribe((key) => {
-      this.user = key
-    });
-    console.log(this.user.userName);
+  ngOnInit() {
+    this.getUserName();
   }
 
-  // getUserName() {
-  //   this.userServices.getUserById(1).subscribe((key => {
-  //     console.log(key);
-  //   }));
-  // }
-  // getUserId() {
-  //   const userData = localStorage.getItem('user');
-  //   const user = userData ? JSON.parse(userData) : null;
-  //   const userId = user.userId
-  //   return userId;
-  // }
+
+  getUserName() {
+    this.userServices.getUserById("1").subscribe((key) => {
+      this.user = key;
+      console.log(this.user);
+    }, error => {
+      console.error('Failed to get user:', error);
+    });
+  }
+
 
   isHighlighted = false;
   getPostClass(id: string) {
-    
     return this.postServices.getPostById(id)?.postId;
   }
 

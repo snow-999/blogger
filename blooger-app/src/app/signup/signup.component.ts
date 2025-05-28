@@ -5,12 +5,6 @@ import { InputService } from '../services/inpustServices';
 import { User } from '../models/user.model';
 import { userService } from '../services/userServices';
 
-
-
-
-
-
-
 @Component({
   selector: 'app-signup',
   imports: [FormsModule],
@@ -18,17 +12,14 @@ import { userService } from '../services/userServices';
   styleUrl: './signup.component.css'
 })
   
-
-
-  
-  
-  
 export class SignupComponent {
   constructor(private router: Router, private inputServices: InputService, private userServices: userService) {}
   phoneInput = '';
-  users: any[] = [];
-  index = 0;
-  newUser: any = { userName: '', email: '' , password:'', phoneNumber:''};
+  newUser: any = { userName: '', email: '', password: '', phoneNumber: '' };
+  
+
+  
+  
 
   addUser() {
     const user: User = {
@@ -37,8 +28,12 @@ export class SignupComponent {
       password: this.newUser.password,
       phoneNumber: this.newUser.phoneNumber,
     }
+    
     this.userServices.addUser(user).subscribe({
-      next: () => console.log('User added successfully'),
+      next(value) {
+        console.log('User added successfully')
+        localStorage.setItem("userId", String(value.userId))
+      },
       error: err => console.error('Error adding user:', err)
     });
   }
@@ -76,7 +71,6 @@ export class SignupComponent {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
     if (emailPattern.test(this.newUser.email)) {
       this.inputServices.setInput('email', this.newUser.email);
-
       return true;
     } else {
       alert('Please enter a valid email address');
@@ -113,7 +107,4 @@ export class SignupComponent {
       return false;
     }
   }
-
-  
-
 }
