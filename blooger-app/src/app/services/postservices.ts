@@ -63,15 +63,20 @@ export class PostService {
         date: newPost.date,
         isEdited: false
       })
-    this.posts = oldPosts
-    localStorage.setItem("post", JSON.stringify(posts))
+    this.posts = oldPosts.map(post => ({
+      ...post,
+      isEdited: post.isEdited === undefined ? false : post.isEdited
+    }));
+    localStorage.setItem("post", JSON.stringify(this.posts))
   }
   
-  updatePost(id:string, newPost: newPost) {
-    const post = this.getPostById(id);
-
-    console.log(post)
+  updatePost(title: string, content: string, post?: newPost) {
+    if (post) {
+      post.title = title;
+      post.content = content
+      post.date = new Date().toLocaleDateString()
     }
+  }
 
   deletePost(id: string) {
     this.posts = this.posts.filter(post => post.postId !== id);

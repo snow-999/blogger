@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { newPost } from '../../models/posts.model';
+import { PostService } from '../../services/postservices';
 
 
 @Component({
@@ -14,14 +15,11 @@ import { newPost } from '../../models/posts.model';
 export class EditPostComponent {
   contentInput = ""
   titleInput = ""
-  @Input() post?: newPost;
+  @Input() post: newPost | undefined;
+  
+  constructor(private postServices: PostService) { }
   
   updatePost() {
-    if (this.post) {
-      this.post.title = this.titleInput;
-      this.post.content = this.contentInput
-      this.post.date = new Date().toLocaleDateString()
-    }
-    
+    this.postServices.updatePost(this.titleInput, this.contentInput, this.post);
   }
 }

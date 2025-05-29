@@ -13,7 +13,18 @@ const dbConfig: DBConfig = {
     storeSchema: [
       { name: 'userName', keypath: 'userName', options: { unique: false } },
       { name: 'email', keypath: 'email', options: { unique: false } },
-      { name: 'password', keypath: 'password', options: { unique: false } }
+      { name: 'password', keypath: 'password', options: { unique: false } },
+      { name: 'phoneNumber', keypath: 'phoneNumber', options: { unique: false } }
+    ]
+  }, {
+    store: 'posts',
+    storeConfig: { keyPath: 'postId', autoIncrement: true },
+    storeSchema: [
+      { name: 'title', keypath: 'title', options: { unique: false } },
+      { name: 'content', keypath: 'content', options: { unique: false } },
+      { name: 'date', keypath: 'date', options: { unique: false } },
+      { name: 'userId', keypath: 'userId', options: { unique: false } },
+      { name: 'userName', keypath: 'userName', options: { unique: false } },
     ]
   }]
 };

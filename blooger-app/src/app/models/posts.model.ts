@@ -5,7 +5,7 @@ export interface Posts {
     title: string;
     content: string;
     date: string;
-    isEdited: boolean;
+    isEdited?: boolean;
 }
 
 export interface newPost {
