@@ -44,12 +44,10 @@ export class SignupComponent {
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnMin = document.getElementById('profileBtnMin');
 
-    const isEmailValid = this.emailValidation();
-    const isUserValid = this.userValidation();
-    const isPassValid = this.passValidation();
-    const isPhoneValid = this.phoneValidation();
     
-    if (isEmailValid && isUserValid && isPassValid && isPhoneValid) {
+    const isValid = this.isValid("email")&&this.isValid("password")&&this.isValid("phoneNumber")&&this.isValid("userName");
+    
+    if (isValid) {
       signupBtn?.classList.add('hide')
         loginBtn?.classList.add('hide')
         logoutBtn?.classList.remove('hide')
@@ -66,38 +64,28 @@ export class SignupComponent {
     }
   }
 
-  emailValidation() {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
-    if (emailPattern.test(this.newUser.email)) {
-      this.inputServices.setInput('email', this.newUser.email);
-      return true;
-    } else {
-      alert('Please enter a valid email address');
-      return false;
+  isValid(fieldName:string) {
+    switch (fieldName) {
+      case "email": { 
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
+      if (emailPattern.test(this.newUser.email)) {
+        this.inputServices.setInput('email', this.newUser.email);
+        return true;
+      } else {
+        return false;
     }
-  }
-
-  userValidation() {
-    if (this.newUser.userName.length > 3) {
-      this.inputServices.setInput('userName', this.newUser.name);
-      return true;
-    } else {
-      alert('Please enter a valid username');
-      return false;
-    }
-  }
-
-  passValidation() {
-    if (this.newUser.password.length > 8) {
-      this.inputServices.setInput('password', this.newUser.password);
-      return true;
-    } else {
-      alert('Please enter a valid password');
-      return false;
-    }
-  }
-  phoneValidation() {
-    const phonePattern = /^\d{10}$/;
+      }
+      case "password": {
+        if (this.newUser.password.length > 8) {
+          this.inputServices.setInput('password', this.newUser.password);
+          return true;
+        } else {
+          alert('Please enter a valid password');
+          return false;
+        }
+       }
+      case "phoneNumber": { 
+        const phonePattern = /^\d{10}$/;
     if (phonePattern.test(this.newUser.phoneNumber)) {
       this.inputServices.setInput('phoneNumber', this.newUser.phoneNumber);
       return true;
@@ -105,5 +93,33 @@ export class SignupComponent {
       alert('Please enter a valid phone number');
       return false;
     }
+      }
+      case "userName": {
+        if (this.newUser.userName.length > 3) {
+          this.inputServices.setInput('userName', this.newUser.name);
+          return true;
+        } else {
+          alert('Please enter a valid username');
+          return false;
+        }
+      }
+        default :{return false}
+      
+    }
+  }
+
+  emailValidation() {
+    
+  }
+
+  userValidation() {
+    
+  }
+
+  passValidation() {
+    
+  }
+  phoneValidation() {
+    
   }
 }

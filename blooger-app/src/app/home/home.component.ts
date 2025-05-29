@@ -1,9 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
-import { newPost } from '../models/posts.model';
 import { CommonModule } from '@angular/common';
 import { NewPostComponent } from '../posts/new-post/new-post.component';
-import { posts } from '../posts';
 import { PostService } from '../services/postservices';
 
 @Component({
@@ -12,15 +10,15 @@ import { PostService } from '../services/postservices';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent{
+export class HomeComponent {
   isAdded: boolean = false;
 
   posts: any
 
-  constructor(private postServices: PostService) {}
+  constructor(private postServices: PostService) { }
 
   ngOnInit() {
-    this.getAllPosts()
+    console.log("component made")
   }
   
   getAllPosts() {
@@ -34,10 +32,10 @@ export class HomeComponent{
   }
 
   makePost() {
-   if (this.isAdded) {
-     this.isAdded = false;
-   }else {
-     this.isAdded = true;
-   }
+    if (this.isAdded) {
+      this.isAdded = false;
+    } else {
+      this.isAdded = true;
+    }
   }
 }

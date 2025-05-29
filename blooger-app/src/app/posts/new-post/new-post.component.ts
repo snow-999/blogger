@@ -18,8 +18,6 @@ export class NewPostComponent {
     contentInput: string = '';
     isAdded: boolean = true;
   
-  
-  
   addPost() {
     const newPost: newPost = {
       title: this.titleInput,
@@ -31,8 +29,10 @@ export class NewPostComponent {
         console.log(value.postId);
         localStorage.setItem("postId", String(value.postId))
       },
+      error(err) {
+        console.log(err)
+      }
     });
     this.isAdded = false;
   }
-  
 }
