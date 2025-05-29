@@ -12,12 +12,11 @@ import { userService } from '../services/userServices';
   styleUrl: './signup.component.css'
 })
   
+  
 export class SignupComponent {
   constructor(private router: Router, private inputServices: InputService, private userServices: userService) {}
   phoneInput = '';
   newUser: any = { userName: '', email: '', password: '', phoneNumber: '' };
-  
-
   
   
 

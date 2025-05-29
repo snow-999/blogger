@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {posts} from '../posts';
 import {newPost, Posts} from '../models/posts.model'
 import { userService } from './userServices';
+import { User } from '../models/user.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -17,9 +18,9 @@ export class PostService {
     let userName: string = "";
       if (userId) {
         this.userServices.getUserById(Number(userId)).subscribe((data) => {
-          this.user = data;
+          this.user = data as User;
+          
           userName = this.user.userName
-          console.log(userName);
         }, error => {
           console.error('Failed to get user:', error);
         });
