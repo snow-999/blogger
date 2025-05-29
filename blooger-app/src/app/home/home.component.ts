@@ -12,15 +12,25 @@ import { PostService } from '../services/postservices';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements DoCheck{
+export class HomeComponent{
   isAdded: boolean = false;
+
+  posts: any
 
   constructor(private postServices: PostService) {}
 
-  posts = posts
+  ngOnInit() {
+    this.getAllPosts()
+  }
   
   getAllPosts() {
-    return this.postServices.getPosts();
+    this.postServices.getAllPosts().subscribe({
+      next: (posts) => {
+        this.posts = posts;
+      },
+      error: (err) => console.error('Failed to load posts', err)
+    });
+    return this.posts;
   }
 
   makePost() {
@@ -29,15 +39,5 @@ export class HomeComponent implements DoCheck{
    }else {
      this.isAdded = true;
    }
-  }
-
-  
-  addPost(newPost: newPost) {
-    this.postServices.addPost(newPost);
-  }
-
-  ngDoCheck(): void {
-      console.log('Ng do check');
-      
   }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-    <form (ngSubmit)="addNewPost()" #postForm="ngForm">
+    <form (ngSubmit)="addPost()" #postForm="ngForm">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input [(ngModel)]="titleInput" name="titleInput" type="text" class="form-control" id="title" placeholder="Enter title">

@@ -4,14 +4,19 @@ import {posts} from '../posts';
 import {newPost, Posts} from '../models/posts.model'
 import { userService } from './userServices';
 import { User } from '../models/user.model';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { Observable } from 'rxjs';
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
+
 export class PostService {
     private posts = posts;
     user: any
   
-  constructor(private userServices: userService) {}
+  constructor(private userServices: userService, private dbService: NgxIndexedDBService) {}
   
   getUserName() {
     const userId = localStorage.getItem("userId")
@@ -26,7 +31,7 @@ export class PostService {
         });
       }
       return userName;
-    }
+  }
   
   getUserId() {
       return String(localStorage.getItem("userId"));
@@ -36,38 +41,20 @@ export class PostService {
    return this.posts.filter(post => post.postId === id);
   }
 
-  getPosts(): Posts[] {
-    return [...this.posts]; // return a copy
+  getAllPosts(): Observable<Posts[]> {
+    return this.dbService.getAll('posts');
   }
 
-  getPostById(id: string): Posts | undefined {
-    return this.posts.find(post => post.postId === id);
+  getPostById(id: number) {
+    return this.dbService.getByKey('posts', id)
   }
 
   getPostsByUserId(userId: string): Posts[] {
     return this.posts.filter(post => post.userId === userId);
   }
 
-  getPostsByUserName(userName: string): Posts[] {
-    return this.posts.filter(post => post.userName === userName);
-  }
-
   addPost(newPost: newPost) {
-    const oldPosts = this.getPosts();
-      oldPosts.push({
-        postId: new Date().getTime().toString(),
-        userName: this.getUserName(),
-        userId: this.getUserId(),
-        title: newPost.title,
-        content: newPost.content,
-        date: newPost.date,
-        isEdited: false
-      })
-    this.posts = oldPosts.map(post => ({
-      ...post,
-      isEdited: post.isEdited === undefined ? false : post.isEdited
-    }));
-    localStorage.setItem("post", JSON.stringify(this.posts))
+    return this.dbService.add('posts', newPost);
   }
   
   updatePost(title: string, content: string, post?: newPost) {
@@ -79,6 +66,6 @@ export class PostService {
   }
 
   deletePost(id: string) {
-    this.posts = this.posts.filter(post => post.postId !== id);
+    return this.dbService.delete('posts', id)
   }
 }

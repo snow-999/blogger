@@ -6,6 +6,7 @@ import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
+import { posts } from '../posts';
 
 
 
@@ -21,10 +22,12 @@ export class ProfileComponent {
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;
-  user: any
+  user: any;
+
 
   ngOnInit() {
     this.getUserName();
+    this.getPostById("1")
   }
 
 
@@ -41,10 +44,17 @@ export class ProfileComponent {
     }
   }
 
+  getPostId() {
+    return localStorage.getItem("postId");
+}
 
   isHighlighted = false;
   getPostClass(id: string) {
-    return this.postServices.getPostById(id)?.postId;
+    return this.postServices.getPostById(Number(id)).subscribe({
+      next(value) {
+        console.log(value);
+      }
+    });
   }
 
 
@@ -63,9 +73,9 @@ export class ProfileComponent {
   }
   
 
-  getPosts(): any {
-    return this.postServices.getPosts();
-  }
+  // getPosts(): any {
+  //   return this.postServices.getPosts();
+  // }
   
   getPostsByUserId(userId: string): any {
     return this.postServices.getPostsByUserId(userId);
@@ -84,24 +94,36 @@ export class ProfileComponent {
     }
   }
 
-  getPostById(id: string): Posts | undefined {
-    return this.postServices.getPostById(id);
+  getPostById(id: string) {
+    this.postServices.getPostById(Number(id)).subscribe(post => {
+      console.log(post);
+
+    })
+     
   }
 
-  getEditForm(id: string) {
-    const myPost = this.getPostById(id)
-    console.log(myPost);
-      if (myPost?.postId == id) {
-        if (!myPost.isEdited) {
-          myPost.isEdited = true;
-        } else {
-          myPost.isEdited = false;
-        }
-    }
-  }
+  // getEditForm(id: string) {
+  //   const myPost = this.getPostById(id).subscribe({
+  //     next(value) {
+  //       if (value.postId == id) {
+  //         if (!value.isEdited) {
+  //           value.isEdited = true;
+  //         } else {
+  //           value.isEdited = false;
+  //         }
+  //     }
+  //     },
+  //   })
+  //   console.log(myPost);
+  // }
   
   addPost(newPost: newPost) {
-    this.postServices.addPost(newPost);
+    this.postServices.addPost(newPost).subscribe({
+      next(value) {
+        console.log(value.postId);
+        localStorage.setItem("postId", String(value.postId))
+      },
+    });
   }
   
   addLike() {

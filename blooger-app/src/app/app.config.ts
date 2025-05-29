@@ -6,7 +6,7 @@ import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
 
 const dbConfig: DBConfig = {
   name: 'MyDb',
-  version: 1,
+  version: 2,
   objectStoresMeta: [{
     store: 'user',
     storeConfig: { keyPath: 'userId', autoIncrement: true },

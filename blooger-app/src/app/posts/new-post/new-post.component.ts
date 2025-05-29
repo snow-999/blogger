@@ -19,14 +19,19 @@ export class NewPostComponent {
     isAdded: boolean = true;
   
   
-  addNewPost() {
+  
+  addPost() {
     const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
       date: new Date().toLocaleDateString()
     };
-    
-    this.postServices.addPost(newPost);
+    this.postServices.addPost(newPost).subscribe({
+      next(value) {
+        console.log(value.postId);
+        localStorage.setItem("postId", String(value.postId))
+      },
+    });
     this.isAdded = false;
   }
   

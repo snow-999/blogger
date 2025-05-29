@@ -3,7 +3,7 @@ import { ApplicationConfig, Injectable, NgModule } from '@angular/core';
 import { NgxIndexedDBService, WithID } from 'ngx-indexed-db';
 import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
 import { User } from '../models/user.model';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
