@@ -13,4 +13,5 @@ export interface newPost {
     content: string;
     date: string;
     postId?: string;
+    userId?: string;
 }

@@ -22,22 +22,20 @@ export class ProfileComponent {
   isAdded: boolean = false;
   isEdit: boolean = false;
   isLiked: boolean = false;
-  user: any;
+  user: User | undefined;
+  posts: Posts[] = [];
 
 
   ngOnInit() {
     this.getUserName();
-    this.getPostById("1")
+    this.getPostsByUserId();
   }
-
 
   getUserName() {
     const userId = localStorage.getItem("userId")
     if (userId) {
       this.userServices.getUserById(Number(userId)).subscribe((data) => {
         this.user = data as User;
-        
-        
       }, error => {
         console.error('Failed to get user:', error);
       });
@@ -50,11 +48,7 @@ export class ProfileComponent {
 
   isHighlighted = false;
   getPostClass(id: string) {
-    return this.postServices.getPostById(Number(id)).subscribe({
-      next(value) {
-        console.log(value);
-      }
-    });
+    return this.postServices.getPostById(Number(id))
   }
 
 
@@ -73,12 +67,23 @@ export class ProfileComponent {
   }
   
 
-  // getPosts(): any {
-  //   return this.postServices.getPosts();
-  // }
+
   
-  getPostsByUserId(userId: string): any {
-    return this.postServices.getPostsByUserId(userId);
+  getPostsByUserId(): void {
+    const userIdStr = localStorage.getItem("userId");
+    if (!userIdStr) {
+      console.error('User ID not found in local storage');
+      return;
+    }
+    this.postServices.getPostsByUserId(userIdStr).subscribe({
+      next: (posts: Posts[]) => {
+        console.log('Posts by user:', posts);
+        this.posts = posts;
+      },
+      error: (error) => {
+        console.error('Error fetching posts by user:', error);
+      }
+    });
   }
 
   deletePost(postId: string) {
@@ -97,9 +102,7 @@ export class ProfileComponent {
   getPostById(id: string) {
     this.postServices.getPostById(Number(id)).subscribe(post => {
       console.log(post);
-
     })
-     
   }
 
   // getEditForm(id: string) {

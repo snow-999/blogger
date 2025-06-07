@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { CommonModule } from '@angular/common';
 import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
+import { userService } from '../services/userServices';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -14,14 +16,27 @@ import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
 export class LoginComponent {
   passInput = '';
   emailInput = '';
+  users: User[] = [];
 
-  constructor(private router: Router,  private inputServices: InputService) {}
+  constructor(private router: Router,  private inputServices: InputService, private userServices: userService) {}
 
   showData() {
     console.log('Email:', this.emailInput);
     console.log('Password:', this.passInput);
   }
 
+  
+  getUserByEmail() {
+    this.userServices.getUserByEmail(this.emailInput).
+    subscribe((user: User | undefined) => {
+      if (user) {
+        this.users.push(user);
+        console.log('User found:', user);
+      } else {
+        console.log('User not found');
+      }
+    });
+  }
   
   login() {
     const signupBtn = document.getElementById('signup');
@@ -31,13 +46,12 @@ export class LoginComponent {
     const profileBtnMin = document.getElementById('profileBtnMin');
     const isValid = this.isValid("email")&&this.isValid("pass");
     const userData = localStorage.getItem('user');
+    this.getUserByEmail()
+    
 
 
-    if (userData) { 
-      const user = JSON.parse(userData);
-      
-      
-      if (user.email === this.emailInput && user.password === this.passInput && isValid) { 
+    if (this.users) { 
+
         signupBtn?.classList.add('hide')
         signupBtn?.classList.remove('show')
         loginBtn?.classList.add('hide')
@@ -50,14 +64,12 @@ export class LoginComponent {
         profileBtnMin?.classList.remove('hide')
         console.log('Login successful');
         this.router.navigate(['']);
-  }
-  else {
+    }else {
     alert('Invalid email or password');
     console.log(this.passInput.length);
   }
       
     }
-  }
 
 
   isValid(fieldName:string) {

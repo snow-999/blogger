@@ -18,14 +18,14 @@
 }
 
 <h3>My Posts</h3>
-@for (post of getPostsByUserId((user?.userId.toString())); track post.postId) {
+@for (post of posts; track post.postId) {
   <div class="card w-100 mb-3">
     <div class="card-body">
-      <h5 class="card-title">{{ post?.userName }}</h5>
+      <h5 class="card-title">{{post?.userName }}</h5>
       <h5 class="card-text">{{ post?.title }}</h5>
       <p class="card-text">{{ post?.content }}</p>
-      <p class="card-text"><small class="text-muted">Last updated {{post?.date| date:'short'}}</small></p>
-      <div class="w-25 btn-container btn-container d-flex justify-content-between align-items-center">
+        <p class="card-text"><small class="text-muted">Last updated {{post?.date| date:'short'}}</small></p>
+        <div class="w-25 btn-container btn-container d-flex justify-content-between align-items-center">
         <button (click)="getDynamicStyles(post.postId)" type="button" [ngClass]="getPostClass(post.postId)" class="btn">Like</button>
         <!-- <button (click)="getEditForm(post.postId)" type="button" id="updateButton" class=" btn btn-primary">Update</button> -->
         <button (click)="deletePost(post.postId)" type="button" id="deleteButton" class="btn btn btn-danger">delete</button>

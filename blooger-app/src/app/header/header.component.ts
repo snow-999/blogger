@@ -25,6 +25,7 @@ export class HeaderComponent {
     profileBtnMin?.classList.remove('show')
     profileBtnMin?.classList.add('hide')
     console.log('Logout successful'); 
+    localStorage.removeItem('userId');
   }
 
   showMiniNav() { 

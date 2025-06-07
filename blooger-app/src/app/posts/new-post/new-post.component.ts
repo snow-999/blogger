@@ -22,11 +22,17 @@ export class NewPostComponent {
     const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
-      date: new Date().toLocaleDateString()
+      date: new Date().toLocaleDateString(),
+      userId: this.postServices.getUserId(),
     };
+    
     this.postServices.addPost(newPost).subscribe({
       next(value) {
         console.log(value.postId);
+        console.log(value);
+        console.log("Post added successfully");
+        
+        
         localStorage.setItem("postId", String(value.postId))
       },
       error(err) {

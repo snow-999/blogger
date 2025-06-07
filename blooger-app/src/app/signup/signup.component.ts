@@ -30,7 +30,7 @@ export class SignupComponent {
     
     this.userServices.addUser(user).subscribe({
       next(value) {
-        console.log('User added successfully')
+        console.log(value);
         localStorage.setItem("userId", String(value.userId))
       },
       error: err => console.error('Error adding user:', err)
@@ -48,6 +48,7 @@ export class SignupComponent {
     const isValid = this.isValid("email")&&this.isValid("password")&&this.isValid("phoneNumber")&&this.isValid("userName");
     
     if (isValid) {
+      this.addUser()
       signupBtn?.classList.add('hide')
         loginBtn?.classList.add('hide')
         logoutBtn?.classList.remove('hide')
@@ -58,7 +59,6 @@ export class SignupComponent {
         profileBtnMin?.classList.remove('hide')
       console.log('sign up successful');
       this.router.navigate(['']);      
-      this.addUser()
     } else {
       alert('Please fill in all fields correctly');
     }
@@ -106,20 +106,5 @@ export class SignupComponent {
         default :{return false}
       
     }
-  }
-
-  emailValidation() {
-    
-  }
-
-  userValidation() {
-    
-  }
-
-  passValidation() {
-    
-  }
-  phoneValidation() {
-    
   }
 }

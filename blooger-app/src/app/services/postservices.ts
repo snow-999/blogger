@@ -5,7 +5,7 @@ import {newPost, Posts} from '../models/posts.model'
 import { userService } from './userServices';
 import { User } from '../models/user.model';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -49,8 +49,10 @@ export class PostService {
     return this.dbService.getByKey('posts', id)
   }
 
-  getPostsByUserId(userId: string): Posts[] {
-    return this.posts.filter(post => post.userId === userId);
+  getPostsByUserId(userId: string): Observable<Posts[]> {
+    return this.dbService.getAll<Posts>('posts').pipe(
+      map((posts: Posts[]) => posts.filter(post => post.userId === userId))
+    );
   }
 
   addPost(newPost: newPost) {
