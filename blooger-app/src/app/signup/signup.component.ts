@@ -16,7 +16,7 @@ import { userService } from '../services/userServices';
 export class SignupComponent {
   constructor(private router: Router, private inputServices: InputService, private userServices: userService) {}
   phoneInput = '';
-  newUser: any = { userName: '', email: '', password: '', phoneNumber: '' };
+  newUser: User = { userName: '', email: '', password: '', phoneNumber: '' };
   
   
 
@@ -96,7 +96,7 @@ export class SignupComponent {
       }
       case "userName": {
         if (this.newUser.userName.length > 3) {
-          this.inputServices.setInput('userName', this.newUser.name);
+          this.inputServices.setInput('userName', this.newUser.userName);
           return true;
         } else {
           alert('Please enter a valid username');
