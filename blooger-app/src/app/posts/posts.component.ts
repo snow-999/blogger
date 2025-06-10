@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import {Posts} from '../models/posts.model';
+
 import { CommonModule } from '@angular/common';
+import { newPost } from '../models/posts.model';
 @Component({
   selector: 'app-posts',
   imports: [CommonModule],
@@ -11,7 +12,8 @@ import { CommonModule } from '@angular/common';
 
   
 export class PostsComponent {
-  @Input() post?: Posts;
+  @Input() post?: newPost;
+  
   
 
   public addLike() {

@@ -24,11 +24,12 @@ export class NewPostComponent {
       content: this.contentInput,
       date: new Date().toLocaleDateString(),
       userId: this.postServices.getUserId(),
+      isEdited: false
     };
     
     this.postServices.addPost(newPost).subscribe({
       next(value) {
-        console.log(value.postId);
+        console.log(value.isEdited);
         console.log(value);
         console.log("Post added successfully");
         

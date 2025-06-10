@@ -54,10 +54,10 @@ export class LoginComponent {
     const profileBtnMin = document.getElementById('profileBtnMin');
     this.getUserByEmail()
     console.log("=================");
-    console.log(this.users);
+    console.log(this.users.email);
     
     
-    if (this.users) { 
+    if (this.users.email.length > 10) { 
         signupBtn?.classList.add('hide')
         signupBtn?.classList.remove('show')
         loginBtn?.classList.add('hide')

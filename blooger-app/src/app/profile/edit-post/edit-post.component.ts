@@ -21,5 +21,8 @@ export class EditPostComponent {
   
   updatePost() {
     this.postServices.updatePost(this.titleInput, this.contentInput, this.post);
+    if (this.post) {
+      this.post.isEdited = false;
+    }
   }
 }

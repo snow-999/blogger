@@ -2,39 +2,17 @@
     <div class="container">
       <a routerLink="/"  ariaCurrentWhenActive="page"  class="navbar-brand">Blog</a>
       <button (click)="showMiniNav()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span  class="navbar-toggler-icon">
-          
-        </span>
-        
+        <span  class="navbar-toggler-icon "></span>
       </button>
-      @if (showMiniMenu) {
-        <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto align-items-center">
-          <li routerLinkActive="active" class="nav-item">
-            <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"  [routerLinkActiveOptions]="{ exact: true }" class="nav-link">Home</a>
-          </li>
-          <li routerLinkActive="active" id="profileBtnMin" class="nav-item hide">
-            <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
-          </li>
-          <li routerLinkActive="active" id="login" class="nav-item">
-            <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
-          </li>
-          <li routerLinkActive="active" id="signup" class="nav-item">
-            <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link"
-              aria-disabled="true">signup</a>
-          </li>
-          <li  id="logout" class="hide nav-item">
-            <button (click)="logOut()" class="nav-link" aria-disabled="true">log out</button>
-          </li>
-        </ul>
-        </div>
-      } @else {
-        <div class="collapse navbar-collapse mx-0" id="navbarSupportedContent">
+        <div  [ngClass]="{'d-flex flex-column mx-0 collapse navbar-collapse' :  showMiniMenu,
+          'mx-0 collapse navbar-collapse' :!showMiniMenu,
+        }" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
               <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
                 ariaCurrentWhenActive="page" class="nav-link">Home</a>
             </li>
+            
             <li id="profileBtn" class="nav-item" class="hide">
               <a routerLink="profile" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">My Profile</a>
             </li>
@@ -50,8 +28,6 @@
             </li>
           </ul>
           </div>
-      }
-     
     </div>
   </nav>
   <router-outlet/>

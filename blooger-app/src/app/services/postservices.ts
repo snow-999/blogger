@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import {posts} from '../posts';
-import {newPost, Posts} from '../models/posts.model'
+import {newPost} from '../models/posts.model'
 import { userService } from './userServices';
 import { User } from '../models/user.model';
 import { NgxIndexedDBService } from 'ngx-indexed-db';
@@ -13,6 +13,7 @@ import { map, Observable } from 'rxjs';
 })
 
 export class PostService {
+  
     private posts = posts;
     user: any
   
@@ -41,7 +42,7 @@ export class PostService {
    return this.posts.filter(post => post.postId === id);
   }
 
-  getAllPosts(): Observable<Posts[]> {
+  getAllPosts(): Observable<newPost[]> {
     return this.dbService.getAll('posts');
   }
 
@@ -49,9 +50,9 @@ export class PostService {
     return this.dbService.getByKey('posts', id)
   }
 
-  getPostsByUserId(userId: string): Observable<Posts[]> {
-    return this.dbService.getAll<Posts>('posts').pipe(
-      map((posts: Posts[]) => posts.filter(post => post.userId === userId))
+  getPostsByUserId(userId: string): Observable<newPost[]> {
+    return this.dbService.getAll<newPost>('posts').pipe(
+      map((posts: newPost[]) => posts.filter(post => post.userId === userId))
     );
   }
 
@@ -64,6 +65,7 @@ export class PostService {
       post.title = title;
       post.content = content
       post.date = new Date().toLocaleDateString()
+      post.isEdited = false;
     }
   }
 

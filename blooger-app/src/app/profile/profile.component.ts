@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { PostService } from '../services/postservices';
 import { CommonModule } from '@angular/common';
-import { newPost, Posts } from '../models/posts.model';
+import { newPost } from '../models/posts.model';
 import { NewPostComponent } from "../posts/new-post/new-post.component";
 import { EditPostComponent } from "./edit-post/edit-post.component";
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
-import { posts } from '../posts';
+
 
 
 
@@ -17,13 +17,13 @@ import { posts } from '../posts';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  
   constructor( private postServices: PostService, private userServices: userService) { }
   
   isAdded: boolean = false;
-  isEdit: boolean = false;
   isLiked: boolean = false;
   user: User | undefined;
-  posts: Posts[] = [];
+  posts: newPost[] = [];
 
 
   ngOnInit() {
@@ -80,7 +80,7 @@ export class ProfileComponent {
       return;
     }
     this.postServices.getPostsByUserId(userIdStr).subscribe({
-      next: (posts: Posts[]) => {
+      next: (posts: newPost[]) => {
         console.log('Posts by user:', posts);
         this.posts = posts;
       },
@@ -96,10 +96,10 @@ export class ProfileComponent {
   }
 
   makePost() { 
-    if (this.isAdded) {
-      this.isAdded = false;
-    } else {
+    if (!this.isAdded) {
       this.isAdded = true;
+    } else {
+      this.isAdded = false;
     }
   }
 
@@ -109,20 +109,24 @@ export class ProfileComponent {
     })
   }
 
-  // getEditForm(id: string) {
-  //   const myPost = this.getPostById(id).subscribe({
-  //     next(value) {
-  //       if (value.postId == id) {
-  //         if (!value.isEdited) {
-  //           value.isEdited = true;
-  //         } else {
-  //           value.isEdited = false;
-  //         }
-  //     }
-  //     },
-  //   })
-  //   console.log(myPost);
-  // }
+  
+  getEditForm(id: string) {
+    // this.postServices.getPostById(Number(id)).subscribe((post) => {
+    //   const myPost = post as newPost;
+    //   console.log(myPost.isEdited);
+    //   if (myPost.isEdited == false) {
+    //         myPost.isEdited = true;
+    //   }
+    //   this.postServices.updatePost(myPost.title, myPost.content);
+    // });
+    this.posts.filter(post => post.postId === id).forEach(post => {
+      if (post.isEdited === false) {
+        post.isEdited = true;
+      } else {
+        post.isEdited = false;
+      }
+    })
+  }
   
   addPost(newPost: newPost) {
     this.postServices.addPost(newPost).subscribe({

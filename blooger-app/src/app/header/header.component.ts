@@ -1,14 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  constructor(private router: Router) {}
   showMiniMenu = false;
+  showProfile = false;
+  showSignup = false;
+  showLogin = false;
   logOut() {
     const signupBtn = document.getElementById('signup');
     const loginBtn = document.getElementById('login');
@@ -25,6 +30,7 @@ export class HeaderComponent {
     profileBtnMin?.classList.remove('show')
     profileBtnMin?.classList.add('hide')
     console.log('Logout successful'); 
+    this.router.navigate(['']);
     localStorage.removeItem('userId');
   }
 
