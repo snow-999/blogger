@@ -16,7 +16,12 @@ import { User } from '../models/user.model';
 export class LoginComponent {
   passInput = '';
   emailInput = '';
-  users: User[] = [];
+  users: User = {
+    userName: '',
+    email: '',
+    password: '',
+    phoneNumber: ''
+  };
 
   constructor(private router: Router,  private inputServices: InputService, private userServices: userService) {}
 
@@ -26,12 +31,15 @@ export class LoginComponent {
   }
 
   
-  getUserByEmail() {
+   getUserByEmail() {
     this.userServices.getUserByEmail(this.emailInput).
     subscribe((user: User | undefined) => {
       if (user) {
-        this.users.push(user);
-        console.log('User found:', user);
+        this.users = user
+        console.log('User found:', this.users);
+        if (user.userId !== undefined && user.userId !== null) {
+          localStorage.setItem('userId', user.userId.toString());
+        }
       } else {
         console.log('User not found');
       }
@@ -44,14 +52,12 @@ export class LoginComponent {
     const logoutBtn = document.getElementById('logout');
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnMin = document.getElementById('profileBtnMin');
-    const isValid = this.isValid("email")&&this.isValid("pass");
-    const userData = localStorage.getItem('user');
     this.getUserByEmail()
+    console.log("=================");
+    console.log(this.users);
     
-
-
+    
     if (this.users) { 
-
         signupBtn?.classList.add('hide')
         signupBtn?.classList.remove('show')
         loginBtn?.classList.add('hide')

@@ -35,7 +35,11 @@ export class ProfileComponent {
     const userId = localStorage.getItem("userId")
     if (userId) {
       this.userServices.getUserById(Number(userId)).subscribe((data) => {
+        console.log("userName found");
+        
         this.user = data as User;
+        console.log("this is my userNAme", this.user.userName);
+        
       }, error => {
         console.error('Failed to get user:', error);
       });
