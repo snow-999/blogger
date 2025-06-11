@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
 import { CommonModule } from '@angular/common';
 import { NewPostComponent } from '../posts/new-post/new-post.component';

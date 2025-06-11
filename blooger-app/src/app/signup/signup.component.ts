@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
@@ -39,13 +39,6 @@ export class SignupComponent {
   }
 
   register() {
-    const signupBtn = document.getElementById('signup');
-    const loginBtn = document.getElementById('login');
-    const logoutBtn = document.getElementById('logout');
-    const profileBtn = document.getElementById('profileBtn');
-    const profileBtnMin = document.getElementById('profileBtnMin');
-
-    
     const isValid = this.isValid("email")&&this.isValid("password")&&this.isValid("phoneNumber")&&this.isValid("userName");
     
     if (isValid) {

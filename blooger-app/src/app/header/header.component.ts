@@ -13,13 +13,7 @@ export class HeaderComponent {
 
   constructor(private router: Router, public navServices: NavService) {}
   showMiniMenu = false;
-  showProfile = false;
-  showSignup = false;
-  showLogin = false;
   logOut() {
-    
-    
-
     this.navServices.toggleNavState("showLogout");
     this.navServices.toggleNavState("showProfile");
     this.navServices.toggleNavState("showSignup");

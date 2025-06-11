@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { CommonModule } from '@angular/common';
-import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
 import { NavService } from '../services/navServices';
@@ -48,11 +47,6 @@ export class LoginComponent {
   }
   
   login() {
-    const signupBtn = document.getElementById('signup');
-    const loginBtn = document.getElementById('login');
-    const logoutBtn = document.getElementById('logout');
-    const profileBtn = document.getElementById('profileBtn');
-    const profileBtnMin = document.getElementById('profileBtnMin');
     this.getUserByEmail()
     
     
