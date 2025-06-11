@@ -16,10 +16,6 @@ export class HomeComponent {
   posts: any
 
   constructor(private postServices: PostService) { }
-
-  ngOnInit() {
-    console.log("component made")
-  }
   
   getAllPosts() {
     this.postServices.getAllPosts().subscribe({

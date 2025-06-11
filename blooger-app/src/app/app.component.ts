@@ -13,5 +13,4 @@ import { User } from './models/user.model';
 })
 export class AppComponent {
   title = 'blogger-app';
-  
 }

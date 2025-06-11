@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { setAlternateWeakRefImpl } from '@angular/core/primitives/signals';
 import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
+import { NavService } from '../services/navServices';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent {
     phoneNumber: ''
   };
 
-  constructor(private router: Router,  private inputServices: InputService, private userServices: userService) {}
+  constructor(private router: Router,  private inputServices: InputService, private userServices: userService, private navService: NavService) {}
 
   showData() {
     console.log('Email:', this.emailInput);
@@ -53,21 +54,13 @@ export class LoginComponent {
     const profileBtn = document.getElementById('profileBtn');
     const profileBtnMin = document.getElementById('profileBtnMin');
     this.getUserByEmail()
-    console.log("=================");
-    console.log(this.users.email);
     
     
     if (this.users.email.length > 10) { 
-        signupBtn?.classList.add('hide')
-        signupBtn?.classList.remove('show')
-        loginBtn?.classList.add('hide')
-        loginBtn?.classList.remove('show')
-        logoutBtn?.classList.remove('hide')
-        logoutBtn?.classList.add('show')
-        profileBtn?.classList.add('show')
-        profileBtn?.classList.remove('hide')
-        profileBtnMin?.classList.add('show')
-        profileBtnMin?.classList.remove('hide')
+        this.navService.toggleNavState('showSignup');
+        this.navService.toggleNavState('showLogin');
+        this.navService.toggleNavState('showLogout');
+        this.navService.toggleNavState('showProfile');
         console.log('Login successful');
         this.router.navigate(['']);
     }else {

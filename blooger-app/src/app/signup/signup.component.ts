@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { User } from '../models/user.model';
 import { userService } from '../services/userServices';
+import { NavService } from '../services/navServices';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,7 @@ import { userService } from '../services/userServices';
   
   
 export class SignupComponent {
-  constructor(private router: Router, private inputServices: InputService, private userServices: userService) {}
+  constructor(private router: Router, private inputServices: InputService, private userServices: userService, private navService: NavService) {}
   phoneInput = '';
   newUser: User = { userName: '', email: '', password: '', phoneNumber: '' };
   
@@ -49,14 +50,10 @@ export class SignupComponent {
     
     if (isValid) {
       this.addUser()
-      signupBtn?.classList.add('hide')
-        loginBtn?.classList.add('hide')
-        logoutBtn?.classList.remove('hide')
-        logoutBtn?.classList.add('show')
-        profileBtn?.classList.add('show')
-      profileBtn?.classList.remove('hide')
-      profileBtnMin?.classList.add('show')
-        profileBtnMin?.classList.remove('hide')
+      this.navService.toggleNavState('showSignup');
+      this.navService.toggleNavState('showLogin');
+      this.navService.toggleNavState('showLogout');
+      this.navService.toggleNavState('showProfile');
       console.log('sign up successful');
       this.router.navigate(['']);      
     } else {

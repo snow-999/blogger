@@ -8,8 +8,6 @@ import { userService } from '../services/userServices';
 import { User } from '../models/user.model';
 
 
-
-
 @Component({
   selector: 'app-profile',
   imports: [CommonModule, NewPostComponent, EditPostComponent],
@@ -49,29 +47,6 @@ export class ProfileComponent {
   getPostId() {
     return localStorage.getItem("postId");
 }
-
-  isHighlighted = false;
-  getPostClass(id: string) {
-    return this.postServices.getPostById(Number(id))
-  }
-
-
-  
-  
-  getDynamicStyles(id : string) {
-    const postClass = this.getPostClass(id) ?? '';
-    const btn = document.getElementsByClassName(postClass.toString())
-    if (!this.isHighlighted) {
-      this.isHighlighted = true;
-      btn[0].classList.add("liked")
-    } else {
-      this.isHighlighted = false;
-      btn[0].classList.remove("liked")
-    }
-  }
-  
-
-
   
   getPostsByUserId(): void {
     const userIdStr = localStorage.getItem("userId");
@@ -111,14 +86,6 @@ export class ProfileComponent {
 
   
   getEditForm(id: string) {
-    // this.postServices.getPostById(Number(id)).subscribe((post) => {
-    //   const myPost = post as newPost;
-    //   console.log(myPost.isEdited);
-    //   if (myPost.isEdited == false) {
-    //         myPost.isEdited = true;
-    //   }
-    //   this.postServices.updatePost(myPost.title, myPost.content);
-    // });
     this.posts.filter(post => post.postId === id).forEach(post => {
       if (post.isEdited === false) {
         post.isEdited = true;
@@ -135,10 +102,5 @@ export class ProfileComponent {
         localStorage.setItem("postId", String(value.postId))
       },
     });
-  }
-  
-  addLike() {
-    const btn = document.getElementById('likeButton');
-    btn?.classList.toggle('liked');
   }
 }

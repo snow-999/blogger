@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { NavService } from '../services/navServices';
 
 @Component({
   selector: 'app-header',
@@ -9,26 +10,20 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+
+  constructor(private router: Router, public navServices: NavService) {}
   showMiniMenu = false;
   showProfile = false;
   showSignup = false;
   showLogin = false;
   logOut() {
-    const signupBtn = document.getElementById('signup');
-    const loginBtn = document.getElementById('login');
-    const logoutBtn = document.getElementById('logout');
-    const profileNav = document.getElementById('profileBtn');
-    const profileBtnMin = document.getElementById('profileBtnMin');
+    
+    
 
-    signupBtn?.classList.remove('hide')
-    loginBtn?.classList.remove('hide')
-    profileNav?.classList.remove('show')
-    profileNav?.classList.add('hide')
-    logoutBtn?.classList.remove('show')
-    logoutBtn?.classList.add('hide')
-    profileBtnMin?.classList.remove('show')
-    profileBtnMin?.classList.add('hide')
+    this.navServices.toggleNavState("showLogout");
+    this.navServices.toggleNavState("showProfile");
+    this.navServices.toggleNavState("showSignup");
+    this.navServices.toggleNavState("showLogin");
     console.log('Logout successful'); 
     this.router.navigate(['']);
     localStorage.removeItem('userId');
