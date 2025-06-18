@@ -1,37 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
 import { CommonModule } from '@angular/common';
-import { NewPostComponent } from '../posts/new-post/new-post.component';
-import { PostService } from '../services/postservices';
+
+import { posts } from '../posts';
+import { UserService } from '../services/userServices';
+import { NewPostComponent } from "../posts/new-post/new-post.component";
+import { UserComponent } from '../user/user.component';
 
 @Component({
+  standalone: true,
   selector: 'app-home',
-  imports: [PostsComponent, CommonModule, NewPostComponent, PostsComponent],
+  imports: [
+    CommonModule, 
+    PostsComponent, 
+    NewPostComponent, 
+    UserComponent
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  isAdded: boolean = false;
-
-  posts: any
-
-  constructor(private postServices: PostService) { }
   
-  getAllPosts() {
-    this.postServices.getAllPosts().subscribe({
-      next: (posts) => {
-        this.posts = posts;
-      },
-      error: (err) => console.error('Failed to load posts', err)
-    });
-    return this.posts;
-  }
+  
+  isAdded: boolean = false;
+  posts = posts;
+  users: any[] = [];
 
   makePost() {
-    if (this.isAdded) {
-      this.isAdded = false;
-    } else {
-      this.isAdded = true;
-    }
+    this.isAdded = !this.isAdded;
   }
 }

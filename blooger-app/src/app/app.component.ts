@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { HeaderComponent } from "./header/header.component";
-import { userService } from './services/userServices';
-import { User } from './models/user.model';
+
 
 
 

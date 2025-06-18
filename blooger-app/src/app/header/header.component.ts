@@ -7,7 +7,8 @@ import { NavService } from '../services/navServices';
   selector: 'app-header',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, CommonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
+  standalone: true
 })
 export class HeaderComponent {
 

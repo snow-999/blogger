@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { CommonModule } from '@angular/common';
-import { userService } from '../services/userServices';
+
 import { User } from '../models/user.model';
 import { NavService } from '../services/navServices';
+import { UserService } from '../services/userServices';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent {
     phoneNumber: ''
   };
 
-  constructor(private router: Router,  private inputServices: InputService, private userServices: userService, private navService: NavService) {}
+  constructor(private router: Router,  private inputServices: InputService,  private navService: NavService, private userService: UserService) {}
 
   showData() {
     console.log('Email:', this.emailInput);
@@ -31,36 +32,21 @@ export class LoginComponent {
   }
 
   
-   getUserByEmail() {
-    this.userServices.getUserByEmail(this.emailInput).
-    subscribe((user: User | undefined) => {
-      if (user) {
-        this.users = user
-        console.log('User found:', this.users);
-        if (user.userId !== undefined && user.userId !== null) {
-          localStorage.setItem('userId', user.userId.toString());
-        }
-      } else {
-        console.log('User not found');
-      }
-    });
-  }
+  
   
   login() {
-    this.getUserByEmail()
-    
-    
-    if (this.users.email.length > 10) { 
+  
+    if (true) { 
+        // this.userService.createUser(this.users)
         this.navService.toggleNavState('showSignup');
         this.navService.toggleNavState('showLogin');
         this.navService.toggleNavState('showLogout');
         this.navService.toggleNavState('showProfile');
         console.log('Login successful');
         this.router.navigate(['']);
-    }else {
-    alert('Invalid email or password');
-    console.log(this.passInput.length);
-  }
+    } else {
+        alert('Invalid email or password');
+      }
       
     }
 

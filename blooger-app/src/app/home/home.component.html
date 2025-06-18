@@ -8,6 +8,10 @@
     <app-new-post/>
   }
 </div>
-@for (post of getAllPosts(); track post?.postId) {
+@for (post of posts; track post?.postId) {
   <app-posts [post]="post"></app-posts>
 }
+
+<div>
+  <app-user [user]="users"/>
+</div>

@@ -1,35 +1,23 @@
-// people.service.ts
-import { ApplicationConfig, Injectable, NgModule } from '@angular/core';
-import { NgxIndexedDBService, WithID } from 'ngx-indexed-db';
-import { DBConfig, provideIndexedDb } from 'ngx-indexed-db';
-import { User } from '../models/user.model';
-import { map } from 'rxjs/operators';
-
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class userService {
-  constructor(private dbService: NgxIndexedDBService) {}
 
-  addUser(user: User) {
-    return this.dbService.add('user', user);
-  }
+export class UserService {
+  private apiUrl = 'http://localhost:8080/api/v1/signup';
 
-  getAllUsers() {
-    return this.dbService.getAll('user');
-  }
+  constructor(private http: HttpClient) {}
 
-  getUserById(id: number) {
-    return this.dbService.getByKey('user', id);
+  getUsers(): Observable<any> {
+    return this.http.get(this.apiUrl);
   }
-  getUserByEmail(email: string) {
-    return this.dbService.getAll('user').pipe(
-      map((users: any[]) => users.find(user => user.email === email))
-    );
-  }
-
-  deleteUser(id: string) {
-    return this.dbService.delete('user', id);
+  
+  createUser(user: any) {
+    this.http.post(this.apiUrl,user).subscribe({next(value) {
+      console.log(value);
+    },})
   }
 }

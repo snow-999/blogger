@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputService } from '../services/inpustServices';
 import { User } from '../models/user.model';
-import { userService } from '../services/userServices';
 import { NavService } from '../services/navServices';
+import { UserService } from '../services/userServices';
 
 @Component({
   selector: 'app-signup',
@@ -15,34 +15,30 @@ import { NavService } from '../services/navServices';
   
   
 export class SignupComponent {
-  constructor(private router: Router, private inputServices: InputService, private userServices: userService, private navService: NavService) {}
+  constructor(private router: Router, private inputServices: InputService, private navService: NavService, private userService: UserService) {}
   phoneInput = '';
   newUser: User = { userName: '', email: '', password: '', phoneNumber: '' };
   
   
 
-  addUser() {
+  createUser(){
     const user: User = {
       email: this.newUser.email,
       userName: this.newUser.userName,
       password: this.newUser.password,
       phoneNumber: this.newUser.phoneNumber,
     }
-    
-    this.userServices.addUser(user).subscribe({
-      next(value) {
-        console.log(value);
-        localStorage.setItem("userId", String(value.userId))
-      },
-      error: err => console.error('Error adding user:', err)
-    });
+    console.log("===============");
+    this.userService.createUser(user)
   }
+
+
 
   register() {
     const isValid = this.isValid("email")&&this.isValid("password")&&this.isValid("phoneNumber")&&this.isValid("userName");
     
     if (isValid) {
-      this.addUser()
+      this.createUser()
       this.navService.toggleNavState('showSignup');
       this.navService.toggleNavState('showLogin');
       this.navService.toggleNavState('showLogout');

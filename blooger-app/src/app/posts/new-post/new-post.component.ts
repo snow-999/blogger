@@ -26,20 +26,6 @@ export class NewPostComponent {
       userId: this.postServices.getUserId(),
       isEdited: false
     };
-    
-    this.postServices.addPost(newPost).subscribe({
-      next(value) {
-        console.log(value.isEdited);
-        console.log(value);
-        console.log("Post added successfully");
-        
-        
-        localStorage.setItem("postId", String(value.postId))
-      },
-      error(err) {
-        console.log(err)
-      }
-    });
     this.isAdded = false;
   }
 }
