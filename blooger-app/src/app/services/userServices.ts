@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +17,17 @@ export class UserService {
     return this.http.get(this.apiUrl);
   }
   
-  createUser(user: any) {
+  createUser(user: User) {
     this.http.post(this.apiUrl,user).subscribe({next(value) {
       console.log(value);
     },})
   }
+
+  getUser(user: any) {
+    this.http.post('http://localhost:8080/api/v1/login', user).subscribe({next(value) {
+      console.log(value);
+    },})
+
+  }
+
 }

@@ -7,7 +7,7 @@
       </div>
       <div class="col-auto">
         
-        <input (change)="isValid(`email`)" [(ngModel)]="emailInput" name="emailInput" type="email" id="inputemail" class="form-control"
+        <input (change)="isValid(`email`)" [(ngModel)]="user.email" name="emailInput" type="email" id="inputemail" class="form-control"
           aria-describedby="emailHelpInline"/>
           <div *ngIf="!isValid(`email`)" >
             <p>pls enter a valid email</p>
@@ -19,7 +19,7 @@
         <label for="inputPassword6" class="col-form-label">Password</label>
       </div>
       <div class="col-auto">
-        <input (change)="isValid(`pass`)" [(ngModel)]="passInput" name="passInput" type="password" id="inputPassword6" class="form-control"
+        <input (change)="isValid(`pass`)" [(ngModel)]="user.password" name="passInput" type="password" id="inputPassword6" class="form-control"
           aria-describedby="passwordHelpInline">
           <div *ngIf="isValid(`pass`)">
 <p>pls enter a valid password</p>

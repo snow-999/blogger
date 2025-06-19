@@ -28,7 +28,6 @@ export class SignupComponent {
       password: this.newUser.password,
       phoneNumber: this.newUser.phoneNumber,
     }
-    console.log("===============");
     this.userService.createUser(user)
   }
 
