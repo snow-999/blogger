@@ -23,11 +23,9 @@ export class UserService {
     },})
   }
 
-  getUser(user: any) {
-    this.http.post('http://localhost:8080/api/v1/login', user).subscribe({next(value) {
-      console.log(value);
-    },})
-
-  }
-
+  getUser(user: any): Observable<any> {
+  return this.http.post('http://localhost:8080/api/v1/verify', user,{
+  withCredentials: true
+});
+}
 }

@@ -16,27 +16,45 @@ import { UserService } from '../services/userServices';
 })
 export class LoginComponent {
   user: any = {
-    email: '',
+    userName: '',
     password: '',
   };
 
   constructor(private router: Router,  private inputServices: InputService,  private navService: NavService, private userService: UserService) {}
 
   showData() {
-    console.log('Email:', this.user["email"]);
+    console.log('userName:', this.user["userName"]);
     console.log('Password:', this.user["password"]);
   }
 
   
-  getUser() {
-    this.userService.getUser(this.user)
-  }
+getUser() {
+  console.log("============");
+  this.userService.getUser(this.user).subscribe({
+    next: (data) => {
+      console.log("User data:", data); // You get the data here
+    },
+    error: (err) => {
+      console.error("Error fetching user:", err);
+    }
+  });
+  console.log("============");
+}
   
-  login() {
-  
-    const isValid = this.isValid("email")&&this.isValid("password")
-    if (isValid) { 
-        this.getUser();
+ login() {
+    const logUser = this.userService.getUser(this.user);
+    console.log("22222222222222222");
+    console.log(logUser.subscribe(res => {
+      console.log(res);
+      
+    }));
+    
+    const isValid = this.isValid("userName")&&this.isValid("password")
+    if (isValid && logUser != undefined) { 
+      console.log("33333333333333333333");
+      
+      console.log(logUser);
+      
         this.navService.toggleNavState('showSignup');
         this.navService.toggleNavState('showLogin');
         this.navService.toggleNavState('showLogout');
@@ -46,7 +64,6 @@ export class LoginComponent {
     } else {
         alert('Invalid email or password');
       }
-      
     }
 
 
@@ -60,16 +77,16 @@ export class LoginComponent {
             return false;
         }
       }
-      case "email": {
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@example\.com$/;
-        if (emailPattern.test(this.user["email"])) {
-          this.inputServices.setInput('email', this.user["email"]);
-      return true;
-    } else {
-      
-        return false;
-    }
+      case "userName": {
+        if (this.user["userName"].length > 3) {
+          this.inputServices.setInput('userName', this.user.userName);
+          return true;
+        } else {
+          console.log();
+          ('Please enter a valid username');
+          return false;
         }
+      }
         default: {return false}
     }
     

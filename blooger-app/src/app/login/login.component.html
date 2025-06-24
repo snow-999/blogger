@@ -3,14 +3,14 @@
   <form>
     <div class="w-50">
       <div class="col-auto">
-        <label for="inputemail" class="col-form-label">Email</label>
+        <label for="inputemail" class="col-form-label">User Name</label>
       </div>
       <div class="col-auto">
         
-        <input (change)="isValid(`email`)" [(ngModel)]="user.email" name="emailInput" type="email" id="inputemail" class="form-control"
-          aria-describedby="emailHelpInline"/>
-          <div *ngIf="!isValid(`email`)" >
-            <p>pls enter a valid email</p>
+        <input (change)="isValid(`email`)" [(ngModel)]="user.userName" name="userNameInput" type="text" id="userNameInput" class="form-control"
+          aria-describedby="userNameHelpInline"/>
+          <div *ngIf="!isValid(`userName`)" >
+            <p>pls enter a userName</p>
           </div>
       </div>
     </div>
