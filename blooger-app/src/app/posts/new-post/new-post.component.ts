@@ -19,13 +19,18 @@ export class NewPostComponent {
     isAdded: boolean = true;
   
   addPost() {
+    console.log("prossece of adding post started");
     const newPost: newPost = {
       title: this.titleInput,
       content: this.contentInput,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toISOString(),
       userId: this.postServices.getUserId(),
       isEdited: false
     };
+    
+    
+    this.postServices.createPost(newPost)
+    console.log("prossece of adding ended")
     this.isAdded = false;
   }
 }

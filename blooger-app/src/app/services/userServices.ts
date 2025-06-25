@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
@@ -18,14 +18,16 @@ export class UserService {
   }
   
   createUser(user: User) {
+   
     this.http.post(this.apiUrl,user).subscribe({next(value) {
       console.log(value);
     },})
   }
 
   getUser(user: any): Observable<any> {
-  return this.http.post('http://localhost:8080/api/v1/verify', user,{
-  withCredentials: true
+    const headers = new HttpHeaders({
+  'Content-Type': 'application/json'
 });
+  return this.http.post('http://localhost:8080/api/v1/login', user, { withCredentials: true });
 }
 }

@@ -47,15 +47,15 @@ export class ProfileComponent {
   
 
   
-  getEditForm(id: string) {
-    this.posts.filter(post => post.postId === id).forEach(post => {
-      if (post.isEdited === false) {
-        post.isEdited = true;
-      } else {
-        post.isEdited = false;
-      }
-    })
-  }
+  // getEditForm(id: string) {
+  //   this.posts.filter(post => post.postId === id).forEach(post => {
+  //     if (post.isEdited === false) {
+  //       post.isEdited = true;
+  //     } else {
+  //       post.isEdited = false;
+  //     }
+  //   })
+  // }
   
   
 }
