@@ -32,5 +32,7 @@ export class NewPostComponent {
     this.postServices.createPost(newPost)
     console.log("prossece of adding ended")
     this.isAdded = false;
+    this.titleInput="";
+    this.contentInput="";
   }
 }

@@ -16,15 +16,36 @@ import { User } from '../models/user.model';
 })
 export class ProfileComponent {
   
-  
+  constructor(private postServices: PostService) {}
   
   isAdded: boolean = false;
   isLiked: boolean = false;
   user: User | undefined;
   posts: newPost[] = [];
+  userId: any;
 
 
-  
+  ngOnInit() {
+    this.getUserId()
+    this.showMyPosts()
+  }
+
+  getUserId() {
+    this.userId = this.postServices.getUserId()
+  }
+
+  showMyPosts(){
+      this.postServices.getPostsByUserId(this.userId).subscribe({
+      next: (data) => {
+        this.posts = data;
+        console.log(this.posts);
+        
+      },
+      error: (err) => {
+        console.error('Failed to load posts:', err);
+      }
+    });
+  }
 
   
 
@@ -33,7 +54,20 @@ export class ProfileComponent {
 }
   
   
-
+deletePost(postId :number| undefined) {
+  if (postId == undefined) {
+    return
+  }
+  this.postServices.deletePostById(postId).subscribe({
+      next: () => {
+        this.posts = this.posts.filter(post => post.postId !== postId);
+        console.log('Post deleted successfully');
+      },
+      error: (err) => {
+        console.error('Error deleting post:', err);
+      }
+    });
+}
   
 
   makePost() { 
@@ -44,6 +78,21 @@ export class ProfileComponent {
     }
   }
 
+  openEditForm(postId:number | undefined) {
+    if (postId) {
+      this.posts.filter(post => post.postId === postId).forEach(post => {
+
+        if(!post.isEdited) {
+            post.isEdited = true
+        } else {
+          post.isEdited = false;
+        }
+        
+      });
+      
+      
+    }
+  }
   
 
   

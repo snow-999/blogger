@@ -16,30 +16,22 @@ export class PostService {
   
     private postApiUrl = 'http://localhost:8080/api/v1/post';
     private getApiUrl = 'http://localhost:8080/api/v1/posts';
+    private getUserPostsApiUrl = 'http://localhost:8080/api/v1/post/user';
+    private deletePostApiUrl = 'http://localhost:8080/api/v1/post';
+    private updatePostApiUrl = 'http://localhost:8080/api/v1/post';
     public posts:any[] = []
-    
+    public userPosts:any[] = []
+
     createPost(newPost: newPost) {  
       this.http.post(this.postApiUrl, newPost,{withCredentials: true}).subscribe({next(value) {
         console.log(value);
-      },});
-    }
+    },});
+  }
 
 
   getPosts(): Observable<newPost[]> {
     return this.http.get<newPost[]>(this.getApiUrl, {withCredentials: true});
   }
-
-showPosts() {
-  this.getPosts().subscribe({
-    next: (value) => {
-      this.posts = value;
-    },
-    error: (err) => {
-      console.error('Error fetching posts:', err);
-    },
-  });
-  return this.posts
-}
 
   getUserId() {
     const token = this.cookieService.get('JWT_TOKEN');
@@ -47,10 +39,19 @@ showPosts() {
     return decoded?.userId;
   }
   
-  // getPostId(id:string) {
-  //  return thisposts.filter(post => post.postId === id);
-  // }
- 
+
+ getPostsByUserId(userId: number) {
+    return this.http.get<newPost[]>(`${this.getUserPostsApiUrl}/${userId}`,{withCredentials: true})
+ }
+
+ deletePostById(postId:number) {
+  return this.http.delete<newPost[]>(`${this.deletePostApiUrl}/${postId}`,{withCredentials: true})
+ }
+
+ updatePostById(newPost: newPost ,postId:number) {
+  return this.http.put<newPost[]>(`${this.deletePostApiUrl}/${postId}`, newPost, {withCredentials: true})
+ }
+
   decodeToken(token: string): any {
     try {
       const payload = token.split('.')[1];
@@ -61,16 +62,6 @@ showPosts() {
       return null;
   }
 }
-
-
-  updatePost(title: string, content: string, post?: newPost) {
-    if (post) {
-      post.title = title;
-      post.content = content
-      post.date = new Date().toLocaleDateString()
-      post.isEdited = false;
-    }
-  }
 
   getUserPosts(userId:number) {
     return this.posts.filter(post => post.userId == userId)

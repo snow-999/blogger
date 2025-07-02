@@ -19,6 +19,7 @@ import { newPost } from '../models/posts.model';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent {
   posts:any[] = []
   isAdded: boolean = false;
@@ -41,8 +42,7 @@ export class HomeComponent {
         console.error('Error fetching posts:', err);
       },
     });
+    this.postServices.getUserPosts(1)
     return this.posts
   }
-
-
 }

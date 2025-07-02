@@ -20,9 +20,19 @@ export class EditPostComponent {
   constructor(private postServices: PostService) { }
   
   updatePost() {
-    this.postServices.updatePost(this.titleInput, this.contentInput, this.post);
-    if (this.post) {
-      this.post.isEdited = false;
+    const updateedPost :newPost = {
+      title: this.titleInput,
+      content: this.contentInput,
+      userId: this.post?.userId,
+      date: new Date().toISOString(),
+      isEdited: false
     }
+    if (this.post?.postId) {
+    this.postServices.updatePostById(updateedPost, this.post?.postId).subscribe();
+      if (this.post) {
+        this.post.isEdited = false;
+      }
+    }
+    
   }
 }
