@@ -1,10 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PostsComponent } from '../posts/posts.component';
 import { CommonModule } from '@angular/common';
-
-import { UserService } from '../services/userServices';
 import { NewPostComponent } from "../posts/new-post/new-post.component";
-import { UserComponent } from '../user/user.component';
 import { PostService } from '../services/postservices';
 import { newPost } from '../models/posts.model';
 
@@ -21,28 +18,28 @@ import { newPost } from '../models/posts.model';
 })
 
 export class HomeComponent {
-  posts:any[] = []
-  isAdded: boolean = false;
   constructor(private postServices: PostService){}
+  isAdded: boolean = false;
+  posts: newPost[] = [];
+
   
-  ngOnInit() {
-    this.showPosts()
+
+  
+
+  ngOnInit(): void {
+    // subscribe to shared posts$
+    this.postServices.posts.subscribe(data => {
+      this.posts = data;
+    });
+
+    // fetch posts from API once
+    this.postServices.showPosts();
   }
+  
 
   makePost() {
     this.isAdded = !this.isAdded;
   }
 
-  showPosts() {
-    this.postServices.getPosts().subscribe({
-      next: (value) => {
-        this.posts = value;
-      },
-      error: (err) => {
-        console.error('Error fetching posts:', err);
-      },
-    });
-    this.postServices.getUserPosts(1)
-    return this.posts
-  }
+  
 }

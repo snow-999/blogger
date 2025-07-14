@@ -9,8 +9,7 @@
         }" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto align-items-center">
             <li class="nav-item">
-              <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-                ariaCurrentWhenActive="page" class="nav-link">Home</a>
+              <a routerLink="home"  routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">Home</a>
             </li>
             
             @if (navServices.navState["showProfile"]) {
@@ -20,7 +19,7 @@
             }
             @if (navServices.isLoggedIn()) {
              <li id="login" class="nav-item">
-              <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link">login</a>
+              <a routerLink="" routerLinkActive="active" ariaCurrentWhenActive="page"  class="nav-link" [routerLinkActiveOptions]="{ exact: true }" >login</a>
             </li>
               <li id="signup" class="nav-item">
               <a routerLink="signup" routerLinkActive="active" ariaCurrentWhenActive="page" class="nav-link"

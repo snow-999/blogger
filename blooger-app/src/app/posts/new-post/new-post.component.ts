@@ -29,7 +29,10 @@ export class NewPostComponent {
     };
     
     
-    this.postServices.createPost(newPost)
+    this.postServices.createPost(newPost).subscribe({next: ()=> {
+      this.postServices.addPostToArray(newPost)
+    }})
+    
     console.log("prossece of adding ended")
     this.isAdded = false;
     this.titleInput="";

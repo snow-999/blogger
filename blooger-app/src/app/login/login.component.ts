@@ -60,7 +60,7 @@ getUser() {
         this.navService.toggleNavState('showLogout');
         this.navService.toggleNavState('showProfile');
         console.log('Login successful');
-        this.router.navigate(['']);
+        this.router.navigate(['home']);
     } else {
         alert('Invalid email or password');
       }

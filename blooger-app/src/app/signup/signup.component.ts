@@ -43,7 +43,7 @@ export class SignupComponent {
       this.navService.toggleNavState('showLogout');
       this.navService.toggleNavState('showProfile');
       console.log('sign up successful');
-      this.router.navigate(['']);      
+      this.router.navigate(['home']);      
     } else {
       alert('Please fill in all fields correctly');
     }

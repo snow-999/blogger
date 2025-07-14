@@ -27,27 +27,16 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.getUserId()
-    this.showMyPosts()
+    this.postServices.userPosts.subscribe(data => {
+      this.posts = data
+    })
+
+    this.postServices.showMyPosts()
   }
 
   getUserId() {
     this.userId = this.postServices.getUserId()
   }
-
-  showMyPosts(){
-      this.postServices.getPostsByUserId(this.userId).subscribe({
-      next: (data) => {
-        this.posts = data;
-        console.log(this.posts);
-        
-      },
-      error: (err) => {
-        console.error('Failed to load posts:', err);
-      }
-    });
-  }
-
-  
 
   getPostId() {
     return localStorage.getItem("postId");
